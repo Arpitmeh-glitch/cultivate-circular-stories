@@ -49,23 +49,23 @@ function AboutPage() {
       <section className="py-24 lg:py-32">
         <div className="mx-auto grid max-w-[1440px] gap-16 px-6 lg:grid-cols-12 lg:px-12">
           <FadeUp className="lg:col-span-5">
-            <p className="eyebrow text-accent">What we believe</p>
-            <h2 className="mt-6 display-lg text-primary">Habits, not headlines.</h2>
+            <p className="eyebrow text-accent">About us</p>
+            <h2 className="mt-6 display-lg text-primary">Community-driven. Collective by design.</h2>
           </FadeUp>
           <div className="lg:col-span-7 space-y-8 text-lg leading-relaxed text-muted-foreground">
-            <FadeUp><p>Real environmental change shows up in everyday habits — a segregated bin, a refused plastic bag, a clean lane, a woman running her own composting enterprise. We build the systems that make those habits ordinary, not exceptional.</p></FadeUp>
-            <FadeUp delay={100}><p>Every program is co-designed with the community it serves, led by local women, and measured against outcomes the community itself cares about — cleaner streets, less plastic, dignified livelihoods.</p></FadeUp>
+            <FadeUp><p>We are a group of community-driven individuals working towards building sustainable and inclusive communities through grassroots participation, innovation, and collective action.</p></FadeUp>
+            <FadeUp delay={100}><p>Every program is co-designed with the community it serves, led by local women, and measured against outcomes the community itself cares about — cleaner streets, dignified livelihoods, and durable public systems.</p></FadeUp>
           </div>
         </div>
       </section>
 
       <section className="border-t border-border py-24 lg:py-32">
         <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-          <FadeUp><p className="eyebrow text-accent">Principles</p></FadeUp>
+          <FadeUp><p className="eyebrow text-accent">Who we are</p></FadeUp>
           <FadeUp delay={100}>
-            <h2 className="mt-6 display-lg max-w-[22ch] text-primary">Four ideas that shape every program.</h2>
+            <h2 className="mt-6 display-lg max-w-[22ch] text-primary">Mission, vision, and the belief beneath both.</h2>
           </FadeUp>
-          <div className="mt-20 grid gap-px overflow-hidden rounded-sm border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-20 grid gap-px overflow-hidden rounded-sm border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
             {PRINCIPLES.map((p, i) => (
               <FadeUp key={p.t} delay={i * 80}>
                 <div className="h-full bg-background p-8">
@@ -79,14 +79,45 @@ function AboutPage() {
         </div>
       </section>
 
+      <section className="border-t border-border py-24 lg:py-32">
+        <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+          <FadeUp><p className="eyebrow text-accent">Team</p></FadeUp>
+          <FadeUp delay={100}>
+            <h2 className="mt-6 display-lg max-w-[22ch] text-primary">The people behind the collective.</h2>
+          </FadeUp>
+          <div className="mt-20 grid gap-px overflow-hidden rounded-sm border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+            {TEAM.map((m, i) => (
+              <FadeUp key={m.name} delay={i * 60}>
+                <div className="h-full bg-background p-8">
+                  <p className="font-display text-3xl font-semibold text-accent">{String(i + 1).padStart(2, "0")}</p>
+                  <h3 className="mt-8 font-display text-xl font-semibold text-primary">{m.name}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{m.role}</p>
+                </div>
+              </FadeUp>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <SiteFooter />
     </div>
   );
 }
 
 const PRINCIPLES = [
-  { t: "Community-led", d: "Programs co-designed with the people who run them every day." },
-  { t: "Measurable", d: "Every initiative ties to a material, reportable outcome." },
-  { t: "Circular", d: "Materials, money, and skills loop back into the community." },
-  { t: "Equitable", d: "Women's leadership is built in, never bolted on." },
+  { t: "Mission", d: "To help build sustainable cities and communities through participatory community-led action." },
+  { t: "Vision", d: "To build self-sustaining systems from the bottom up." },
+  { t: "Philosophy", d: "Every individual has unlimited potential if they have access to the right resources." },
+];
+
+const TEAM = [
+  { name: "Sakshi Singh Sirari", role: "Founder and Managing Trustee" },
+  { name: "Poorvi Gupta", role: "Vice President" },
+  { name: "Pramila Singh", role: "Secretary" },
+  { name: "Shreyansh Saxena", role: "Treasurer" },
+  { name: "Ishan Jain", role: "Legal Advisory" },
+  { name: "Rachit Tiwari", role: "Lead, Research and Strategic Partnerships" },
+  { name: "Kajal Yadav", role: "Program Officer, Samagrah" },
+  { name: "Vikrant Sikarwar", role: "Regional Program Coordinator" },
+  { name: "Pragati Tripathi", role: "Content Strategist" },
 ];

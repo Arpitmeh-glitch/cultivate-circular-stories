@@ -1,6 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 
-export function Counter({ to, suffix = "+", duration = 1800 }: { to: number; suffix?: string; duration?: number }) {
+export function Counter({
+  to,
+  suffix = "+",
+  duration = 1800,
+  display,
+}: {
+  to: number;
+  suffix?: string;
+  duration?: number;
+  display?: string;
+}) {
   const [value, setValue] = useState(0);
   const ref = useRef<HTMLSpanElement | null>(null);
   const started = useRef(false);
@@ -25,5 +35,6 @@ export function Counter({ to, suffix = "+", duration = 1800 }: { to: number; suf
     return () => io.disconnect();
   }, [to, duration]);
 
+  if (display) return <span ref={ref}>{display}</span>;
   return <span ref={ref}>{value}{suffix}</span>;
 }
