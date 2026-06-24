@@ -201,28 +201,25 @@ function Home() {
             <FadeUp delay={160}>
               <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-background px-4 py-2 text-[11px] font-semibold uppercase tracking-widest text-primary/70">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                Placeholder figures · verified report coming soon
+                A decade of grassroots action
               </span>
             </FadeUp>
           </div>
 
           <div className="mt-20 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { n: 20, l: "Communities engaged" },
-              { n: 500, l: "Volunteers mobilised" },
-              { n: 100, l: "Awareness drives & workshops" },
-              { n: 50, l: "Women in our network" },
+              { n: 10, display: "10+", l: "Years" },
+              { n: 12500, display: "12,500+", l: "Community Volunteers" },
+              { n: 1100000, display: "1.1 Mn", l: "People Reached" },
+              { n: 600000, display: "600K", l: "Lives Impacted" },
             ].map((s, i) => (
               <FadeUp key={s.l} delay={i * 100}>
                 <div className="border-t border-primary/20 pt-6">
-                  <p className="font-display text-[80px] font-semibold leading-none tracking-tight text-primary lg:text-[120px]">
-                    <Counter to={s.n} />
+                  <p className="font-display text-[64px] font-semibold leading-none tracking-tight text-primary lg:text-[96px]">
+                    <Counter to={s.n} display={s.display} />
                   </p>
                   <p className="mt-4 text-sm font-medium uppercase tracking-[0.18em] text-primary/70">
                     {s.l}
-                  </p>
-                  <p className="mt-2 text-[11px] italic text-muted-foreground">
-                    Placeholder · awaiting verified figure
                   </p>
                 </div>
               </FadeUp>
