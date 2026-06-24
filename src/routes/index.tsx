@@ -115,19 +115,19 @@ function Home() {
             <p className="eyebrow text-accent">Our mission</p>
           </FadeUp>
           <FadeUp delay={120}>
-            <h2 className="mx-auto mt-10 display-lg max-w-[22ch] text-primary">
-              Cleaner communities.{" "}
-              <span className="text-accent">Sustainable lifestyles.</span>{" "}
-              Women-led change.
+            <h2 className="mx-auto mt-10 display-lg max-w-[24ch] text-primary">
+              Sustainable cities and communities,{" "}
+              <span className="text-accent">built bottom-up</span> through
+              participatory community-led action.
             </h2>
           </FadeUp>
           <FadeUp delay={220}>
             <p className="mx-auto mt-10 max-w-[60ch] text-lg leading-relaxed text-muted-foreground">
-              From doorstep waste segregation to plastic-free drives,
-              school sustainability labs, and women-run circular
-              enterprises — we turn environmental awareness into everyday
-              practice, and put rural women at the heart of the green
-              economy.
+              We are a group of community-driven individuals working towards
+              building sustainable and inclusive communities through grassroots
+              participation, innovation, and collective action — guided by a
+              simple belief that every individual has unlimited potential when
+              given access to the right resources.
             </p>
           </FadeUp>
         </div>
