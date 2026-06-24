@@ -206,17 +206,20 @@ function Home() {
             </FadeUp>
           </div>
 
-          <div className="mt-20 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-20 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { n: 10, display: "10+", l: "Years" },
               { n: 12500, display: "12,500+", l: "Community Volunteers" },
               { n: 1100000, display: "1.1 Mn", l: "People Reached" },
               { n: 600000, display: "600K", l: "Lives Impacted" },
+              { n: 1300000, display: "1.3 Mn", l: "Unique Interventions Delivered" },
+              { n: 5, display: "5", l: "Districts" },
+              { n: 17, display: "17", l: "Blocks" },
             ].map((s, i) => (
-              <FadeUp key={s.l} delay={i * 100}>
-                <div className="border-t border-primary/20 pt-6">
-                  <p className="font-display text-[64px] font-semibold leading-none tracking-tight text-primary lg:text-[96px]">
-                    <Counter to={s.n} display={s.display} />
+              <FadeUp key={s.l} delay={i * 100} className="h-full">
+                <div className="flex h-full min-w-0 flex-col border-t border-primary/20 pt-6">
+                  <p className="font-display text-[56px] font-semibold leading-none tracking-tight text-primary sm:text-[64px] lg:text-[72px] xl:text-[80px]">
+                    <Counter to={s.n} display={s.display} duration={2200} />
                   </p>
                   <p className="mt-4 text-sm font-medium uppercase tracking-[0.18em] text-primary/70">
                     {s.l}
