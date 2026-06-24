@@ -152,3 +152,9 @@
 .animate-float {
   animation: float-slow 7s ease-in-out infinite;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fade-up, .fade-up.in-view { opacity: 1 !important; animation: none !important; }
+  .animate-marquee, .animate-float { animation: none !important; }
+}
