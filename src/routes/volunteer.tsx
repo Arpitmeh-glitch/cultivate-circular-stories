@@ -5,6 +5,8 @@ import { SectionHero } from "@/components/site/SectionHero";
 import { FadeUp } from "@/components/site/FadeUp";
 import { useEffect, useState } from "react";
 import { z } from "zod";
+import { useServerFn } from "@tanstack/react-start";
+import { geocodeCity } from "@/lib/geocode.functions";
 
 export const Route = createFileRoute("/volunteer")({
   head: () => ({
@@ -18,7 +20,7 @@ export const Route = createFileRoute("/volunteer")({
   component: VolunteerPage,
 });
 
-const MAPTILER_KEY = import.meta.env.VITE_MAPTILER_KEY;
+
 
 const INDIAN_CITIES = [
   "agra", "ahmedabad", "ajmer", "aligarh", "allahabad", "amritsar", "aurangabad", "bareilly", "bhopal", "bhubaneswar",
@@ -97,26 +99,20 @@ function VolunteerPage() {
   const [citySuggestions, setCitySuggestions] = useState<string[]>([]);
   const [cityLoading, setCityLoading] = useState(false);
   const [cityHint, setCityHint] = useState("Start typing your city and choose a suggestion.");
+  const fetchGeocode = useServerFn(geocodeCity);
 
   useEffect(() => {
-    if (!MAPTILER_KEY || cityQuery.length < 2) {
+    if (cityQuery.length < 2) {
       setCitySuggestions([]);
       return;
     }
 
-    const controller = new AbortController();
+    let cancelled = false;
     const timeout = setTimeout(async () => {
       setCityLoading(true);
       try {
-        const url = `https://api.maptiler.com/geocoding/${encodeURIComponent(cityQuery)}.json?key=${MAPTILER_KEY}&autocomplete=true&country=in&limit=5&types=place,locality,neighbourhood,municipality`;
-        const response = await fetch(url, { signal: controller.signal });
-        const json = await response.json();
-        if (!response.ok || !Array.isArray(json.features)) {
-          setCitySuggestions([]);
-          setCityHint("No autocomplete suggestions found. Type a known Indian city and select it.");
-          return;
-        }
-        const suggestions = json.features.map((feature: any) => feature.place_name as string);
+        const { suggestions } = await fetchGeocode({ data: { q: cityQuery } });
+        if (cancelled) return;
         setCitySuggestions(suggestions);
         if (!suggestions.length) {
           setCityHint("No autocomplete suggestions found. Type a known Indian city and select it.");
@@ -124,17 +120,17 @@ function VolunteerPage() {
           setCityHint("Choose a suggestion from the list to verify your location.");
         }
       } catch {
-        setCitySuggestions([]);
+        if (!cancelled) setCitySuggestions([]);
       } finally {
-        setCityLoading(false);
+        if (!cancelled) setCityLoading(false);
       }
     }, 350);
 
     return () => {
+      cancelled = true;
       clearTimeout(timeout);
-      controller.abort();
     };
-  }, [cityQuery]);
+  }, [cityQuery, fetchGeocode]);
 
   function onCitySelect(city: string) {
     setCityQuery(city);
