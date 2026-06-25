@@ -5,6 +5,8 @@ import { SectionHero } from "@/components/site/SectionHero";
 import { FadeUp } from "@/components/site/FadeUp";
 import { useEffect, useState } from "react";
 import { z } from "zod";
+import { useServerFn } from "@tanstack/react-start";
+import { geocodeCity } from "@/lib/geocode.functions";
 
 export const Route = createFileRoute("/volunteer")({
   head: () => ({
