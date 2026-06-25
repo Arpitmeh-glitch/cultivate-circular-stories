@@ -39,6 +39,10 @@ export const images = {
     nagarPalikaParishadTilhar: "/images/partners/nagar-palika-parishad-tilhar.png",
     swachhBharatAbhiyan: "/images/partners/swachh-bharat-abhiyan.png",
     upGovernment: "/images/partners/up-government.png",
+    breakFreeFromPlastic: "/images/partners/breakfreefromplastic.png",
+    gaiaLogo: "/images/partners/gaialogo.png",
+    sdg11Logo: "/images/partners/sdg11logo.png",
+    galaLogo: "/images/partners/galogo.png",
   },
   visuals: {
     wasteImpactDistribution: "/images/visuals/waste-impact-distribution.png",

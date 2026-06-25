@@ -33,14 +33,14 @@ function ContactPage() {
             <div className="mt-8 space-y-10">
               <div>
                 <p className="eyebrow text-muted-foreground">General & Partnerships</p>
-                <a href="mailto:po.gfcindia@gmail.com,greenfuturecollective@gmail.com" className="mt-3 block font-display text-2xl font-semibold text-primary hover:text-accent">
-                  po.gfcindia@gmail.com, greenfuturecollective@gmail.com
+                <a href="mailto:greenfuturecollective@gmail.com" className="mt-3 block font-display text-2xl font-semibold text-primary hover:text-accent">
+                  greenfuturecollective@gmail.com
                 </a>
               </div>
               <div>
                 <p className="eyebrow text-muted-foreground">Press</p>
-                <a href="mailto:po.gfcindia@gmail.com,greenfuturecollective@gmail.com" className="mt-3 block font-display text-2xl font-semibold text-primary hover:text-accent">
-                  po.gfcindia@gmail.com, greenfuturecollective@gmail.com
+                <a href="mailto:greenfuturecollective@gmail.com" className="mt-3 block font-display text-2xl font-semibold text-primary hover:text-accent">
+                  greenfuturecollective@gmail.com
                 </a>
               </div>
               <div>
@@ -53,7 +53,7 @@ function ContactPage() {
           <FadeUp delay={100} className="lg:col-span-7">
             <form
               className="rounded-sm border border-border bg-background p-8 lg:p-12"
-              action="mailto:po.gfcindia@gmail.com,greenfuturecollective@gmail.com"
+              action="mailto:greenfuturecollective@gmail.com"
               method="post"
               encType="text/plain"
             >
