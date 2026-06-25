@@ -3,13 +3,6 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { CollageHero } from "@/components/site/CollageHero";
 import { Marquee } from "@/components/site/Marquee";
-import { FocusRow } from "@/components/site/FocusRow";
-import {
-  VisualWaste,
-  VisualWomen,
-  VisualCircular,
-  VisualEPR,
-} from "@/components/site/FocusVisuals";
 import { FadeUp } from "@/components/site/FadeUp";
 import { Counter } from "@/components/site/Counter";
 import { images } from "@/data/images";
