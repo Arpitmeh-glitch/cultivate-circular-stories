@@ -20,7 +20,7 @@ export const Route = createFileRoute("/volunteer")({
   component: VolunteerPage,
 });
 
-const MAPTILER_KEY = import.meta.env.VITE_MAPTILER_KEY;
+
 
 const INDIAN_CITIES = [
   "agra", "ahmedabad", "ajmer", "aligarh", "allahabad", "amritsar", "aurangabad", "bareilly", "bhopal", "bhubaneswar",
