@@ -5,6 +5,10 @@ const partners = [
   { name: "Nagar Palika Parishad Tilhar", logo: images.partners.nagarPalikaParishadTilhar, type: "logo" },
   { name: "Swachh Bharat Abhiyan", logo: images.partners.swachhBharatAbhiyan, type: "logo" },
   { name: "Government of Uttar Pradesh", logo: images.partners.upGovernment, type: "logo" },
+  { name: "Break Free From Plastic", logo: images.partners.breakFreeFromPlastic, type: "logo" },
+  { name: "Gaia", logo: images.partners.gaiaLogo, type: "logo" },
+  { name: "SDG 11", logo: images.partners.sdg11Logo, type: "logo" },
+  { name: "GALA", logo: images.partners.galaLogo, type: "logo" },
   { name: "Nagar Panchayat Katra", type: "text" },
   { name: "Nagar Panchayat Khutar", type: "text" },
 ];

@@ -3,10 +3,8 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SectionHero } from "@/components/site/SectionHero";
 import { FadeUp } from "@/components/site/FadeUp";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { z } from "zod";
-import { useServerFn } from "@tanstack/react-start";
-import { geocodeCity } from "@/lib/geocode.functions";
 
 export const Route = createFileRoute("/volunteer")({
   head: () => ({
@@ -22,64 +20,26 @@ export const Route = createFileRoute("/volunteer")({
 
 
 
-const INDIAN_CITIES = [
-  "agra", "ahmedabad", "ajmer", "aligarh", "allahabad", "amritsar", "aurangabad", "bareilly", "bhopal", "bhubaneswar",
-  "chandigarh", "chennai", "coimbatore", "dehradun", "delhi", "dharamshala", "erode", "faridabad", "ghaziabad", "gurugram",
-  "gwalior", "hubli", "hyderabad", "indore", "jaipur", "jalandhar", "jammu", "jodhpur", "kanpur", "kannur",
-  "karnal", "kochi", "kolkata", "kozhikode", "lucknow", "ludhiana", "madurai", "mumbai", "mumbai", "nagpur", "nashik",
-  "patna", "pune", "rajkot", "ranchi", "shillong", "surat", "thane", "tiruchirappalli", "vadodara", "varanasi", "vellore",
-  "visakhapatnam", "warangal"
-];
-
-const COMMON_SKILLS = [
-  "research", "photography", "writing", "data", "legal", "finance", "design", "education", "community",
-  "logistics", "coordination", "training", "facilitation", "communications", "marketing", "documentation",
-  "outreach", "policy", "analysis", "management", "sustainability", "operations", "monitoring", "evaluation",
-  "program", "project", "field", "social", "digital"
-];
-
-function validateCity(city: string) {
-  const normalized = city.trim().toLowerCase();
-  if (!normalized) return false;
-  return INDIAN_CITIES.some((cityName) => normalized === cityName || normalized.includes(cityName));
-}
-
-function validateSkills(skills: string) {
-  const normalized = skills.trim().toLowerCase();
-  if (!normalized) return false;
-  if (/([a-z]{3,})\s+\1/.test(normalized)) return false;
-  const words = normalized.split(/[^a-z]+/).filter((word) => word.length >= 3);
-  const distinctWords = Array.from(new Set(words));
-  const matchedSkillCount = distinctWords.filter((word) => COMMON_SKILLS.includes(word)).length;
-  return matchedSkillCount >= 1 || distinctWords.length >= 3;
-}
-
 const schema = z.object({
   name: z.string().trim().min(2, "Please share your name").max(80),
-  email: z.string().trim().email("Enter a valid email").max(160),
-  phone: z.string().trim().regex(/^[+0-9][0-9\s-]{9,19}$/, "Enter a valid phone number, e.g. +91 98765 43210").refine((value) => {
-    const digits = value.replace(/\D/g, "");
-    return digits.length >= 10 && digits.length <= 12;
-  }, { message: "Phone number must contain 10–12 digits" }),
-  city: z.string().trim().min(2, "Enter a city name").max(80).refine(validateCity, { message: "Enter a valid city or town in India" }),
-  cityVerified: z.enum(["true", "false"]).refine((value) => value === "true", { message: "Please select your city from the autocomplete suggestions" }),
-  skills: z.string().trim().min(8, "Tell us your skills or experience").max(400).refine(validateSkills, { message: "Please describe real skills or strengths rather than gibberish" }),
-  availability: z.string().trim().min(2).max(120),
+  contact: z.string().trim().min(8, "Please share your contact details").max(240),
+  profile: z.string().trim().min(4, "Please describe whether you are a student, working professional, or passionate environmentalist").max(120),
+  mode: z.string().trim().min(4, "Choose online, offline, or hybrid").refine((value) => ["online", "offline", "hybrid"].includes(value.toLowerCase()), { message: "Choose online, offline, or hybrid" }),
+  hours: z.string().trim().min(1, "Please share how many hours you are willing to give").max(80),
 });
 
-const MAIL_TO = "po.gfcindia@gmail.com,greenfuturecollective@gmail.com";
+const MAIL_TO = "partnerships.gfcindia@gmail.com";
 
 type VolunteerFormData = z.infer<typeof schema>;
 
-function buildVolunteerMailto(data: Omit<VolunteerFormData, "cityVerified">) {
+function buildVolunteerMailto(data: VolunteerFormData) {
   const subject = `Volunteer inquiry from ${data.name}`;
   const body = [
     `Name: ${data.name}`,
-    `Email: ${data.email}`,
-    `Phone: ${data.phone}`,
-    `City: ${data.city}`,
-    `Skills: ${data.skills}`,
-    `Availability: ${data.availability}`,
+    `Contact details: ${data.contact}`,
+    `Profile: ${data.profile}`,
+    `Preferred mode: ${data.mode}`,
+    `Hours available: ${data.hours}`,
   ].join("\n");
 
   return `mailto:${MAIL_TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -94,50 +54,6 @@ const TRACKS = [
 function VolunteerPage() {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [cityQuery, setCityQuery] = useState("");
-  const [cityVerified, setCityVerified] = useState(false);
-  const [citySuggestions, setCitySuggestions] = useState<string[]>([]);
-  const [cityLoading, setCityLoading] = useState(false);
-  const [cityHint, setCityHint] = useState("Start typing your city and choose a suggestion.");
-  const fetchGeocode = useServerFn(geocodeCity);
-
-  useEffect(() => {
-    if (cityQuery.length < 2) {
-      setCitySuggestions([]);
-      return;
-    }
-
-    let cancelled = false;
-    const timeout = setTimeout(async () => {
-      setCityLoading(true);
-      try {
-        const { suggestions } = await fetchGeocode({ data: { q: cityQuery } });
-        if (cancelled) return;
-        setCitySuggestions(suggestions);
-        if (!suggestions.length) {
-          setCityHint("No autocomplete suggestions found. Type a known Indian city and select it.");
-        } else {
-          setCityHint("Choose a suggestion from the list to verify your location.");
-        }
-      } catch {
-        if (!cancelled) setCitySuggestions([]);
-      } finally {
-        if (!cancelled) setCityLoading(false);
-      }
-    }, 350);
-
-    return () => {
-      cancelled = true;
-      clearTimeout(timeout);
-    };
-  }, [cityQuery, fetchGeocode]);
-
-  function onCitySelect(city: string) {
-    setCityQuery(city);
-    setCityVerified(true);
-    setCitySuggestions([]);
-    setCityHint("Selected city accepted.");
-  }
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -151,7 +67,7 @@ function VolunteerPage() {
       return;
     }
     setErrors({});
-    const { cityVerified: _, ...emailData } = parsed.data;
+    const emailData = parsed.data;
     const href = buildVolunteerMailto(emailData);
     setSubmitted(true);
     window.location.href = href;
@@ -162,7 +78,7 @@ function VolunteerPage() {
       <SiteHeader />
       <SectionHero
         eyebrow="Volunteer"
-        title={<>Bring your <span className="text-accent">skills,</span> not just your time.</>}
+        title={<>Be the change you wish to see in the world. Signup for our volunteer program today!</>}
         lede="We onboard volunteers into real teams with real outcomes — not photo opportunities. Tell us about you and we'll point you to the program that fits."
       />
 
@@ -214,31 +130,17 @@ function VolunteerPage() {
                 ) : (
                   <form onSubmit={onSubmit} className="px-8 py-10 lg:px-12 lg:py-12">
                     <div className="grid gap-10 sm:grid-cols-2">
-                      <BigField label="Your name" name="name" placeholder="Sakshi Singh" error={errors.name} />
-                      <BigField label="Email" name="email" type="email" placeholder="you@example.com" error={errors.email} />
-                      <BigField label="Phone" name="phone" type="tel" placeholder="+91 98765 43210" error={errors.phone} />
-                      <LocationField
-                        label="City"
-                        name="city"
-                        value={cityQuery}
-                        onChange={(value) => {
-                          setCityQuery(value);
-                          setCityVerified(validateCity(value));
-                          if (validateCity(value)) {
-                            setCityHint("This city looks valid. Select a suggestion to verify.");
-                          } else {
-                            setCityHint("Choose a location from the autocomplete list.");
-                          }
-                        }}
-                        suggestions={citySuggestions}
-                        loading={cityLoading}
-                        error={errors.city}
-                        hint={cityHint}
-                        onSelect={onCitySelect}
+                      <BigField label="Name" name="name" placeholder="Sakshi Singh" error={errors.name} />
+                      <BigField label="Contact details" name="contact" placeholder="Email, phone, or WhatsApp" className="sm:col-span-2" error={errors.contact} />
+                      <BigField
+                        label="What do you do?"
+                        name="profile"
+                        placeholder="Student / working professional / passionate environmentalist"
+                        className="sm:col-span-2"
+                        error={errors.profile}
                       />
-                      <input type="hidden" name="cityVerified" value={cityVerified ? "true" : "false"} />
-                      <BigField label="Skills you bring" name="skills" textarea placeholder="e.g. social research, photography, finance, field coordination..." error={errors.skills} className="sm:col-span-2" hint="Use real skill names or experience areas, not random text." />
-                      <BigField label="Availability" name="availability" placeholder="Weekends · 4 hrs/week · or specific dates" error={errors.availability} className="sm:col-span-2" />
+                      <BigField label="Which mode would you prefer" name="mode" placeholder="Online / Offline / Hybrid" className="sm:col-span-2" error={errors.mode} />
+                      <BigField label="How many hours are you willing to give?" name="hours" placeholder="e.g. 4 hours per week" className="sm:col-span-2" error={errors.hours} />
                     </div>
                     <div className="mt-12 flex flex-wrap items-center gap-6 border-t border-border pt-8">
                       <button type="submit" className="inline-flex items-center gap-3 rounded-full bg-primary px-7 py-4 text-sm font-semibold text-primary-foreground hover:bg-primary/90">
@@ -293,62 +195,3 @@ function BigField({
   );
 }
 
-function LocationField({
-  label,
-  name,
-  value,
-  onChange,
-  suggestions,
-  loading,
-  onSelect,
-  error,
-  hint,
-}: {
-  label: string;
-  name: string;
-  value: string;
-  onChange: (value: string) => void;
-  suggestions: string[];
-  loading: boolean;
-  onSelect: (value: string) => void;
-  error?: string;
-  hint?: string;
-}) {
-  return (
-    <div className="relative block">
-      <label className="block">
-        <span className="flex items-baseline justify-between">
-          <span className="eyebrow text-primary/60">{label}</span>
-          {error && <span className="text-[11px] font-medium text-destructive">{error}</span>}
-        </span>
-        <input
-          name={name}
-          type="text"
-          value={value}
-          onChange={(event) => onChange(event.currentTarget.value)}
-          placeholder="Lucknow"
-          className="mt-3 w-full border-b border-border bg-transparent py-3 font-display text-xl text-primary placeholder:text-primary/30 outline-none transition-colors focus:border-accent"
-          autoComplete="off"
-        />
-      </label>
-      {loading ? (
-        <p className="mt-2 text-xs text-muted-foreground">Looking up matching cities...</p>
-      ) : null}
-      {suggestions.length > 0 ? (
-        <div className="absolute z-10 mt-2 max-h-56 w-full overflow-auto rounded-sm border border-border bg-background shadow-lg">
-          {suggestions.map((suggestion) => (
-            <button
-              key={suggestion}
-              type="button"
-              onClick={() => onSelect(suggestion)}
-              className="block w-full text-left px-4 py-3 text-sm text-primary hover:bg-accent/5"
-            >
-              {suggestion}
-            </button>
-          ))}
-        </div>
-      ) : null}
-      {hint ? <p className="mt-2 text-xs text-muted-foreground">{hint}</p> : null}
-    </div>
-  );
-}
