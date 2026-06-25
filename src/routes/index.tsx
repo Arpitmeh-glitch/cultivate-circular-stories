@@ -133,56 +133,39 @@ function Home() {
         </div>
       </section>
 
-      {/* FOCUS AREAS */}
-      <FocusRow
-        index="01"
-        title="Waste Segregation & Clean Communities"
-        body={
-          "Many communities face challenges such as littered public spaces, poor waste disposal habits, and limited awareness about waste segregation. These issues contribute to unhealthy surroundings and environmental pollution.\n\nGreen Future Collective addresses these challenges through community clean-up drives, door-to-door waste segregation awareness campaigns, and creative best-out-of-waste activities that encourage sustainable habits and responsible waste management."
-        }
-        bullets={[
-          "Community clean-up and plog drives",
-          "Door-to-door waste segregation awareness campaigns",
-          "Best-out-of-waste and sustainability activities",
-          "Community participation for cleaner public spaces",
-        ]}
-        visual={<VisualWaste />}
-      />
-      <FocusRow
-        index="02"
-        title="Women's Empowerment & Sustainable Livelihoods"
-        body="Rural women lead every program we run. We build the green skills, micro-enterprise support, and market access that turn sustainability into a dignified livelihood — not charity."
-        bullets={[
-          "Self-help groups and green-skill training",
-          "Micro-enterprise capital and shared workshop spaces",
-          "Direct market linkages with brands and CSR partners",
-        ]}
-        reverse
-        visual={<div className="absolute inset-0"><img src={images.programs.womenEmpowerment} alt="Women's Empowerment" className="absolute inset-0 h-full w-full object-cover"/></div>}
-      />
-      <FocusRow
-        index="03"
-        title="Plastic Reduction & Circular Economy"
-        body="We replace single-use plastic with refill, reuse, and upcycling systems built for villages and small towns — and loop materials back into local production instead of landfills."
-        bullets={[
-          "Plastic-free drives and refill/reuse pilots",
-          "Community composting and upcycling workshops",
-          "Reverse logistics and reuse-repair networks",
-        ]}
-        visual={<VisualCircular />}
-      />
-      <FocusRow
-        index="04"
-        title="Sustainability Education & Environmental Awareness"
-        body="We bring climate and circular-economy literacy into schools, colleges and panchayats — and back it up with EPR field operations that producers can actually verify."
-        bullets={[
-          "Sustainability curriculum for schools & colleges",
-          "Community awareness drives and youth volunteer cohorts",
-          "EPR plan design, verified collection & CPCB-aligned reporting",
-        ]}
-        reverse
-        visual={<VisualEPR />}
-      />
+      {/* WHAT WE DO */}
+      <section className="py-32 lg:py-48">
+        <div className="mx-auto max-w-[1280px] px-6 text-center lg:px-12">
+          <FadeUp>
+            <p className="eyebrow text-accent">What we do</p>
+          </FadeUp>
+          <FadeUp delay={120}>
+            <h2 className="mx-auto mt-10 display-lg max-w-[24ch] text-primary">
+              Cleaner communities, empowered women,{" "}
+              <span className="text-accent">and circular systems</span> built from the ground up.
+            </h2>
+          </FadeUp>
+          <FadeUp delay={220}>
+            <p className="mx-auto mt-10 max-w-[60ch] text-lg leading-relaxed text-muted-foreground">
+              We run grassroots programs across waste segregation, women's
+              livelihoods, plastic reduction, and sustainability education —
+              turning environmental awareness into everyday habits and
+              dignified work for rural communities.
+            </p>
+          </FadeUp>
+          <FadeUp delay={300}>
+            <div className="mt-12">
+              <Link
+                to="/programs"
+                className="inline-flex items-center gap-3 rounded-full border border-primary/25 bg-transparent px-7 py-4 text-sm font-semibold text-primary hover:bg-secondary"
+              >
+                Explore our programs
+                <span aria-hidden>→</span>
+              </Link>
+            </div>
+          </FadeUp>
+        </div>
+      </section>
 
       {/* IMPACT */}
       <section className="border-y border-border bg-secondary/40 py-32 lg:py-44">
