@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SectionHero } from "@/components/site/SectionHero";
 import { FadeUp } from "@/components/site/FadeUp";
+import { useState } from "react";
 import { images } from "@/data/images";
 
 export const Route = createFileRoute("/gallery")({
@@ -61,12 +62,29 @@ function GalleryPage() {
 }
 
 function Tile({ src }: { src: string }) {
+  const [imgSrc, setImgSrc] = useState(src);
+  const [fallbackCount, setFallbackCount] = useState(0);
+
+  function handleError() {
+    if (fallbackCount > 1) return;
+    const fallback = imgSrc.endsWith(".jpeg")
+      ? imgSrc.replace(/\.jpeg$/, ".jpg")
+      : imgSrc.endsWith(".jpg")
+      ? imgSrc.replace(/\.jpg$/, ".png")
+      : imgSrc;
+
+    if (fallback === imgSrc) return;
+    setFallbackCount(fallbackCount + 1);
+    setImgSrc(fallback);
+  }
+
   return (
-    <figure className="group relative h-full w-full overflow-hidden rounded-sm">
+    <figure className="group relative h-full w-full overflow-hidden rounded-sm bg-muted">
       <img
-        src={src}
-        alt=""
+        src={imgSrc}
+        alt="Gallery photo"
         loading="lazy"
+        onError={handleError}
         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
       />
     </figure>
