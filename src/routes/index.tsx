@@ -127,6 +127,9 @@ function Home() {
         </div>
       </section>
 
+      {/* NEWS / PRESS */}
+      <NewsMarquee />
+
       {/* WHAT WE DO */}
       <section className="py-32 lg:py-48">
         <div className="mx-auto max-w-[1280px] px-6 text-center lg:px-12">
