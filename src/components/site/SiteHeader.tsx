@@ -4,7 +4,7 @@ import { images } from "@/data/images";
 
 const NAV = [
   { to: "/about", label: "About", hash: undefined as string | undefined },
-  { to: "/about", label: "What we do", hash: "what-we-do" },
+  
   { to: "/impact", label: "Impact", hash: undefined },
   { to: "/projects", label: "Projects", hash: undefined },
   { to: "/gallery", label: "Gallery", hash: undefined },
