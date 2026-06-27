@@ -4,12 +4,9 @@ import { images } from "@/data/images";
 
 const NAV = [
   { to: "/about", label: "About", hash: undefined as string | undefined },
-  
   { to: "/impact", label: "Impact", hash: undefined },
   { to: "/projects", label: "Projects", hash: undefined },
   { to: "/gallery", label: "Gallery", hash: undefined },
-  { to: "/collaborate", label: "Collaborate", hash: undefined },
-  { to: "/volunteer", label: "Volunteer", hash: undefined },
   { to: "/contact", label: "Contact", hash: undefined },
 ] as const;
 

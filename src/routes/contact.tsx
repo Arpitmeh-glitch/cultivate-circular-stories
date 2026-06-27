@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SectionHero } from "@/components/site/SectionHero";
@@ -48,10 +48,32 @@ function ContactPage() {
                 <p className="mt-3 text-lg text-primary">Uttar Pradesh, India</p>
               </div>
             </div>
+
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link
+                to="/collaborate"
+                className="inline-flex items-center rounded-full border border-primary/25 px-5 py-2.5 text-sm font-medium text-primary hover:bg-secondary"
+              >
+                Collaborate
+              </Link>
+              <Link
+                to="/volunteer"
+                className="inline-flex items-center rounded-full border border-primary/25 px-5 py-2.5 text-sm font-medium text-primary hover:bg-secondary"
+              >
+                Volunteer
+              </Link>
+              <a
+                href="#contact-form"
+                className="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                Get in touch
+              </a>
+            </div>
           </FadeUp>
 
           <FadeUp delay={100} className="lg:col-span-7">
             <form
+              id="contact-form"
               className="rounded-sm border border-border bg-background p-8 lg:p-12"
               action="mailto:greenfuturecollective@gmail.com"
               method="post"
