@@ -58,7 +58,8 @@ function Home() {
                   <span aria-hidden>→</span>
                 </Link>
                 <Link
-                  to="/programs"
+                  to="/about"
+                  hash="what-we-do"
                   className="inline-flex items-center gap-3 rounded-full border border-primary/25 bg-transparent px-7 py-4 text-sm font-semibold text-primary hover:bg-secondary"
                 >
                   Explore our programs
@@ -153,7 +154,8 @@ function Home() {
           <FadeUp delay={300}>
             <div className="mt-12">
               <Link
-                to="/programs"
+                to="/about"
+                hash="what-we-do"
                 className="inline-flex items-center gap-3 rounded-full border border-primary/25 bg-transparent px-7 py-4 text-sm font-semibold text-primary hover:bg-secondary"
               >
                 Explore our programs
