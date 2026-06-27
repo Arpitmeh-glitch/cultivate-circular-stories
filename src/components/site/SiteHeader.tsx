@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import { images } from "@/data/images";
 
 const NAV = [
-  { to: "/about", label: "About" },
-  { to: "/programs", label: "Programs" },
-  { to: "/impact", label: "Impact" },
-  { to: "/projects", label: "Projects" },
-  { to: "/gallery", label: "Gallery" },
-  { to: "/collaborate", label: "Collaborate" },
-  { to: "/volunteer", label: "Volunteer" },
-  { to: "/contact", label: "Contact" },
+  { to: "/about", label: "About", hash: undefined as string | undefined },
+  { to: "/about", label: "What we do", hash: "what-we-do" },
+  { to: "/impact", label: "Impact", hash: undefined },
+  { to: "/projects", label: "Projects", hash: undefined },
+  { to: "/gallery", label: "Gallery", hash: undefined },
+  { to: "/collaborate", label: "Collaborate", hash: undefined },
+  { to: "/volunteer", label: "Volunteer", hash: undefined },
+  { to: "/contact", label: "Contact", hash: undefined },
 ] as const;
 
 export function SiteHeader() {
@@ -45,8 +45,9 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-7 xl:flex">
           {NAV.map((n) => (
             <Link
-              key={n.to}
+              key={`${n.to}-${n.label}`}
               to={n.to}
+              hash={n.hash}
               className="text-sm font-medium text-primary/80 transition-colors hover:text-primary"
               activeProps={{ className: "text-sm font-medium text-primary" }}
             >
@@ -87,8 +88,9 @@ export function SiteHeader() {
           <nav className="flex flex-col px-6 py-4">
             {NAV.map((n) => (
               <Link
-                key={n.to}
+                key={`${n.to}-${n.label}`}
                 to={n.to}
+                hash={n.hash}
                 onClick={() => setOpen(false)}
                 className="border-b border-border/60 py-4 text-lg font-medium text-primary"
               >

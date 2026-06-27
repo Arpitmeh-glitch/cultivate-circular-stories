@@ -54,7 +54,7 @@ export function SiteFooter() {
           <div className="grid grid-cols-2 gap-10 lg:col-span-6 lg:grid-cols-3">
             <FooterCol title="Explore" links={[
               { to: "/about", label: "About" },
-              { to: "/programs", label: "Programs" },
+              { to: "/about", label: "What we do", hash: "what-we-do" },
               { to: "/impact", label: "Impact" },
               { to: "/projects", label: "Projects" },
               { to: "/gallery", label: "Gallery" },
@@ -84,14 +84,14 @@ export function SiteFooter() {
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: { to: string; label: string }[] }) {
+function FooterCol({ title, links }: { title: string; links: { to: string; label: string; hash?: string }[] }) {
   return (
     <div>
       <p className="eyebrow text-primary-foreground/60">{title}</p>
       <ul className="mt-4 space-y-3">
         {links.map((l) => (
-          <li key={l.to}>
-            <Link to={l.to} className="text-sm text-primary-foreground/85 hover:text-accent">
+          <li key={`${l.to}-${l.label}`}>
+            <Link to={l.to} hash={l.hash} className="text-sm text-primary-foreground/85 hover:text-accent">
               {l.label}
             </Link>
           </li>
