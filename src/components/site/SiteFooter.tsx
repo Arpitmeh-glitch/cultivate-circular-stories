@@ -1,8 +1,10 @@
 import { Link } from "@tanstack/react-router";
+import { Instagram, Linkedin, Twitter } from "lucide-react";
 import { images } from "@/data/images";
 
 const INSTAGRAM_URL = "https://www.instagram.com/greenfuturecollective";
 const LINKEDIN_URL = "https://in.linkedin.com/company/green-future-collective";
+const TWITTER_URL = "https://x.com/GFC_India?s=20";
 
 export function SiteFooter() {
   return (
