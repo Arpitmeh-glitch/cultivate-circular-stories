@@ -37,18 +37,27 @@ export function SiteFooter() {
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label="Green Future Collective on Instagram"
-                className="inline-flex h-10 items-center gap-2 rounded-full border border-primary-foreground/25 px-4 text-xs font-medium text-primary-foreground/85 hover:bg-primary-foreground/10"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary-foreground/25 text-primary-foreground/85 hover:bg-primary-foreground/10"
               >
-                Instagram <span aria-hidden>↗</span>
+                <Instagram size={18} />
               </a>
               <a
                 href={LINKEDIN_URL}
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label="Green Future Collective on LinkedIn"
-                className="inline-flex h-10 items-center gap-2 rounded-full border border-primary-foreground/25 px-4 text-xs font-medium text-primary-foreground/85 hover:bg-primary-foreground/10"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary-foreground/25 text-primary-foreground/85 hover:bg-primary-foreground/10"
               >
-                LinkedIn <span aria-hidden>↗</span>
+                <Linkedin size={18} />
+              </a>
+              <a
+                href={TWITTER_URL}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label="Green Future Collective on Twitter"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary-foreground/25 text-primary-foreground/85 hover:bg-primary-foreground/10"
+              >
+                <Twitter size={18} />
               </a>
             </div>
           </div>
@@ -62,15 +71,12 @@ export function SiteFooter() {
               { to: "/gallery", label: "Gallery" },
             ]} />
             <FooterCol title="Engage" links={[
-              { to: "/collaborate", label: "Collaborate" },
-              { to: "/volunteer", label: "Volunteer" },
               { to: "/donate", label: "Donate" },
               { to: "/contact", label: "Contact" },
             ]} />
             <div>
               <p className="eyebrow text-primary-foreground/60">Based in</p>
               <p className="mt-4 text-sm leading-relaxed text-primary-foreground/80">
-                Uttar Pradesh, India<br />
                 Grassroots action across rural & urban communities.
               </p>
             </div>
