@@ -3,13 +3,6 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SectionHero } from "@/components/site/SectionHero";
 import { FadeUp } from "@/components/site/FadeUp";
-import { FocusRow } from "@/components/site/FocusRow";
-import {
-  VisualWaste,
-  VisualWomen,
-  VisualCircular,
-  VisualEPR,
-} from "@/components/site/FocusVisuals";
 import { TeamCarousel } from "@/components/site/TeamCarousel";
 import { images } from "@/data/images";
 
@@ -17,9 +10,9 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — Green Future Collective" },
-      { name: "description", content: "A grassroots eco-feminist non-profit building cleaner communities, sustainable habits, and women-led environmental action across India." },
+      { name: "description", content: "An eco-feminist sustainability organization building circular, community-owned waste systems that transform cities into resilient, equitable hubs under SDG 11." },
       { property: "og:title", content: "About — Green Future Collective" },
-      { property: "og:description", content: "Who we are, what we do, and how we work — on the ground in Uttar Pradesh." },
+      { property: "og:description", content: "Who we are, what we do, and the philosophy that shapes our work." },
       { property: "og:image", content: images.projects.badaMangal },
     ],
   }),
@@ -32,8 +25,8 @@ function AboutPage() {
       <SiteHeader />
       <SectionHero
         eyebrow="About"
-        title={<>Grassroots action for a <span className="text-accent">cleaner</span> India.</>}
-        lede="Green Future Collective is an eco-feminist non-profit turning environmental awareness into everyday practice — through waste segregation, plastic reduction, sustainability education, and women-led circular livelihoods."
+        title={<>Circular cities. <span className="text-accent">Community-owned</span> systems.</>}
+        lede="Green Future Collective is an eco-feminist sustainability organization building circular, community-owned waste systems that transform cities into resilient, equitable hubs under SDG 11."
       />
 
       <section className="border-b border-border pb-4">
@@ -54,25 +47,38 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32">
+      {/* WHO WE ARE */}
+      <section id="who-we-are" className="py-24 lg:py-32">
         <div className="mx-auto grid max-w-[1440px] gap-16 px-6 lg:grid-cols-12 lg:px-12">
           <FadeUp className="lg:col-span-5">
-            <p className="eyebrow text-accent">About us</p>
-            <h2 className="mt-6 display-lg text-primary">Community-driven. Collective by design.</h2>
+            <p className="eyebrow text-accent">Who we are</p>
+            <h2 className="mt-6 display-lg text-primary">Community-owned. Circular by design.</h2>
           </FadeUp>
           <div className="lg:col-span-7 space-y-8 text-lg leading-relaxed text-muted-foreground">
-            <FadeUp><p>We are a group of community-driven individuals working towards building sustainable and inclusive communities through grassroots participation, innovation, and collective action.</p></FadeUp>
-            <FadeUp delay={100}><p>Every program is co-designed with the community it serves, led by local women, and measured against outcomes the community itself cares about — cleaner streets, dignified livelihoods, and durable public systems.</p></FadeUp>
+            <FadeUp>
+              <p>
+                Green Future Collective is an eco-feminist sustainability organization building circular, community-owned waste systems that transform cities into resilient, equitable hubs under SDG 11.
+              </p>
+            </FadeUp>
+            <FadeUp delay={100}>
+              <p>
+                We partner with municipal governments to redesign waste management from the ground up — centering informal workers, empowering neighbourhoods, and turning linear disposal into closed-loop resource recovery.
+              </p>
+            </FadeUp>
           </div>
         </div>
       </section>
 
-      <section id="who-we-are" className="border-t border-border py-24 lg:py-32">
+      {/* WHAT WE DO — Mission / Vision / Philosophy */}
+      <section id="what-we-do" className="border-t border-border py-24 lg:py-32">
         <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-          <FadeUp><p className="eyebrow text-accent">Who we are</p></FadeUp>
+          <FadeUp><p className="eyebrow text-accent">What we do</p></FadeUp>
           <FadeUp delay={100}>
-            <h2 className="mt-6 display-lg max-w-[22ch] text-primary">Mission, vision, and the belief beneath both.</h2>
+            <h2 className="mt-6 display-lg max-w-[24ch] text-primary">
+              Mission, vision, and the <span className="text-accent">philosophy</span> beneath both.
+            </h2>
           </FadeUp>
+
           <div className="mt-20 grid gap-px overflow-hidden rounded-sm border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
             {PRINCIPLES.map((p, i) => (
               <FadeUp key={p.t} delay={i * 80}>
@@ -84,57 +90,39 @@ function AboutPage() {
               </FadeUp>
             ))}
           </div>
+
+          {/* Philosophy detail + convictions */}
+          <div className="mt-24 grid gap-16 lg:grid-cols-12">
+            <FadeUp className="lg:col-span-5">
+              <p className="eyebrow text-accent">Our philosophy, in depth</p>
+              <h3 className="mt-6 display-lg text-primary">Sustainable cities are built from the bottom up.</h3>
+            </FadeUp>
+            <div className="lg:col-span-7 space-y-6 text-lg leading-relaxed text-muted-foreground">
+              <FadeUp>
+                <p>
+                  Sustainable cities emerge from the bottom up — not through top-down mandates, but by unlocking the knowledge, labor, and innovation already present in communities. Waste is not a problem to be managed away; it is a design flaw in our urban metabolism.
+                </p>
+              </FadeUp>
+              <FadeUp delay={100}>
+                <p>
+                  By treating residents as partners and municipalities as enablers, we turn exclusionary systems into shared infrastructure.
+                </p>
+              </FadeUp>
+            </div>
+          </div>
+
+          <div className="mt-16 grid gap-px overflow-hidden rounded-sm border border-border bg-border sm:grid-cols-1 lg:grid-cols-3">
+            {CONVICTIONS.map((c, i) => (
+              <FadeUp key={c.t} delay={i * 80}>
+                <div className="h-full bg-background p-8">
+                  <p className="font-display text-3xl font-semibold text-accent">0{i + 1}</p>
+                  <h3 className="mt-8 font-display text-xl font-semibold text-primary">{c.t}</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{c.d}</p>
+                </div>
+              </FadeUp>
+            ))}
+          </div>
         </div>
-      </section>
-
-      {/* WHAT WE DO — merged from former Programs page */}
-      <section id="what-we-do" className="border-t border-border py-24 lg:py-32">
-        <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-          <FadeUp><p className="eyebrow text-accent">What we do</p></FadeUp>
-          <FadeUp delay={100}>
-            <h2 className="mt-6 display-lg max-w-[24ch] text-primary">
-              Six programs. <span className="text-accent">One system.</span>
-            </h2>
-          </FadeUp>
-          <FadeUp delay={180}>
-            <p className="mt-8 max-w-[60ch] text-lg leading-relaxed text-muted-foreground">
-              Each program is a building block of a community-scale, self-sustaining system — designed to run independently, measured rigorously, and woven together in the field.
-            </p>
-          </FadeUp>
-        </div>
-
-        <FocusRow index="01" title="Raised Education"
-          body="We strengthen learning ecosystems in under-served schools — from sustainability labs and teacher training to scholarships, library setups, and solar-enabled classrooms."
-          bullets={["Sustainability curriculum and teacher training", "Scholarships and learning support", "School library and solar infrastructure"]}
-          visual={<VisualWaste />} />
-
-        <FocusRow index="02" title="Raised Women"
-          body="Women lead every program we run. We invest in self-help groups, green-skill training, micro-enterprise capital, and direct market linkages so that women aren't just included — they own the systems."
-          bullets={["Self-help groups and women-led enterprises", "Green-skill training and certifications", "Direct market and CSR linkages"]}
-          reverse
-          visual={<div className="absolute inset-0"><img src={images.programs.womenEmpowerment} alt="Raised Women" className="absolute inset-0 h-full w-full object-cover"/></div>} />
-
-        <FocusRow index="03" title="Raised Health"
-          body="Community-rooted health systems built around vision care, cataract surgeries, household-level WASH, and a trained cadre of village health volunteers."
-          bullets={["Vision care screenings and spectacle distribution", "Cataract surgeries and village health camps", "Training of community health volunteers"]}
-          visual={<VisualCircular />} />
-
-        <FocusRow index="04" title="Raised Livelihoods"
-          body="We believe that economic empowerment is the foundation of all forms of liberation. We build the skills, capital, and market access that turn sustainability into dignified work — for farmers, youth, women, and rural entrepreneurs."
-          bullets={["Entrepreneurship development and capital support", "Youth skilling and capacity building", "Farmer training and producer organisations"]}
-          reverse
-          visual={<VisualEPR />} />
-
-        <FocusRow index="05" title="Raised Communities"
-          body="Self-sustaining communities built from the bottom up — through Village Development Committees, household-level WASH, plastic-free drives, and clean public systems that outlast any single project."
-          bullets={["Village Development Committees and ecosystem builders", "Household sanitation and clean drinking water", "Open Defecation Free hamlets and clean public spaces"]}
-          visual={<div className="absolute inset-0"><img src={images.programs.womenEmpowerment} alt="Raised Communities" className="absolute inset-0 h-full w-full object-cover"/></div>} />
-
-        <FocusRow index="06" title="Raised Aspirations"
-          body="Beyond services and statistics, we work on the inner architecture of change — confidence, leadership, and the everyday belief that people closest to a problem can design its solution."
-          bullets={["Leadership development for women and youth", "Mentorship and aspirational role-modelling", "Community storytelling and recognition"]}
-          reverse
-          visual={<VisualWomen />} />
       </section>
 
       <section className="border-t border-border py-24 lg:py-32 overflow-hidden">
@@ -145,7 +133,7 @@ function AboutPage() {
           </FadeUp>
           <FadeUp delay={180}>
             <p className="mt-6 max-w-[58ch] text-base leading-relaxed text-muted-foreground">
-              Meet the trustees, program leads, and coordinators who design and run the collective day to day.
+              Meet the trustees, program leads, and coordinators who design and run the collective day to day. Tap any card to read their full profile.
             </p>
           </FadeUp>
         </div>
@@ -161,19 +149,80 @@ function AboutPage() {
 }
 
 const PRINCIPLES = [
-  { t: "Mission", d: "To help build sustainable cities and communities through participatory community-led action." },
-  { t: "Vision", d: "To build self-sustaining systems from the bottom up." },
-  { t: "Philosophy", d: "Every individual has unlimited potential if they have access to the right resources." },
+  {
+    t: "Mission",
+    d: "To co-create inclusive, zero-waste urban ecosystems by bridging participatory community action with scalable government implementation — ensuring sustainable cities are built with communities, not just for them.",
+  },
+  {
+    t: "Vision",
+    d: "Cities where waste is obsolete, resources circulate locally, and every neighbourhood operates as a self-sustaining node in a regenerative urban economy.",
+  },
+  {
+    t: "Philosophy",
+    d: "Sustainable cities emerge from the bottom up — by unlocking the knowledge, labor, and innovation already present in communities, and by treating waste as a design flaw in our urban metabolism.",
+  },
+];
+
+const CONVICTIONS = [
+  {
+    t: "Justice precedes efficiency",
+    d: "Equitable waste systems must formally integrate informal waste pickers, ensure safe working conditions, and distribute economic benefits fairly.",
+  },
+  {
+    t: "Participation is non-negotiable",
+    d: "Communities hold contextual knowledge that no consultant can replicate. Co-design ensures solutions are adopted, maintained, and scaled organically.",
+  },
+  {
+    t: "Systems change requires dual leverage",
+    d: "Lasting impact happens when grassroots momentum meets policy architecture. We operate at this intersection — translating community proof-points into replicable municipal frameworks.",
+  },
 ];
 
 const TEAM = [
-  { name: "Sakshi Singh Sirari", role: "Founder and Managing Trustee", photo: images.founder.founderPhoto },
-  { name: "Poorvi Gupta", role: "Vice President" },
-  { name: "Pramila Singh", role: "Secretary" },
-  { name: "Shreyansh Saxena", role: "Treasurer" },
-  { name: "Ishan Jain", role: "Legal Advisory" },
-  { name: "Rachit Tiwari", role: "Lead, Research and Strategic Partnerships" },
-  { name: "Kajal Yadav", role: "Program Officer, Samagrah" },
-  { name: "Vikrant Sikarwar", role: "Regional Program Coordinator" },
-  { name: "Pragati Tripathi", role: "Content Strategist" },
+  {
+    name: "Sakshi Singh Sirari",
+    role: "Founder and Managing Trustee",
+    photo: images.founder.founderPhoto,
+    bio: "A gender-informed social development practitioner, Sakshi graduated from Tata Institute of Social Sciences before navigating through varied platforms of social work for over a decade. After a two-year stint as a consultant for the Ministry of Women & Child Development, Government of India, Sakshi founded Green Future Collective with a vision to build sustainability across new, rapidly urbanising towns and cities across India.",
+  },
+  {
+    name: "Poorvi Gupta",
+    role: "Vice President | Independent Journalist | TEDx Speaker",
+    bio: "Gender-focused journalist with a decade-long experience working with globally acclaimed publications including Al Jazeera, Nikkei Asia, Devex, The Polis Project, The Hindu, Article-14, BBC India, and Media Action Against Rape led by Bournemouth University and UNESCO, among others.",
+  },
+  {
+    name: "Pramila Singh",
+    role: "Secretary | Lifelong Educator",
+    bio: "An English Master's graduate from Lucknow University, Pramila has spent over 35 years educating children across India. She has taught more than 100,000 students and currently serves as a senior teacher at City Montessori School, Lucknow.",
+  },
+  {
+    name: "Ishan Jain",
+    role: "Principal Legal Advisor",
+    bio: "A Campus Law Centre (Delhi University) graduate, Ishan has been practicing as a civil and corporate lawyer at the Supreme Court of India since 2008. He serves as the principal legal advisor to the Board of Trustees.",
+  },
+  {
+    name: "Rachit Tiwari",
+    role: "Lead, Research and Strategic Partnerships",
+    bio: "An MSc graduate in Environment and Sustainable Development, Rachit leads collaborations and program design. He also works in ethnography and political ecology research and mentors interns and fellows within the organization.",
+  },
+  {
+    name: "Kajal Yadav",
+    role: "Program Officer, Samagrah",
+    bio: "Kajal Yadav is a passionate social activist, environmental advocate, and dedicated community leader associated with global initiatives including Art of Giving and Blue Orb Foundation. She supports the efficient implementation of Green Future Collective's program initiatives.",
+  },
+  {
+    name: "Vikrant Sikarwar",
+    role: "Regional Program Coordinator",
+    bio: "With over 12 years of experience in logistics, Vikrant manages daily operations, government liaison, and regional coordination. His operational expertise and leadership strengthen the organization's field implementation.",
+  },
+  {
+    name: "Pragati Tripathi",
+    role: "Content Strategist",
+    bio: "Pragati combines data expertise with social impact. Through experience in data management and community engagement, she transforms insights into meaningful communication and change.",
+  },
+  {
+    name: "Aquib Hasan",
+    role: "Community Supervisor",
+    bio: "A B.Tech graduate in Biotechnology with seven years of experience in the Food and Quality sector, Aquib ensures strong community participation, team motivation, and effective on-ground coordination.",
+  },
 ];

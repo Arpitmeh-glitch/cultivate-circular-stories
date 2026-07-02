@@ -65,10 +65,10 @@ export function SiteFooter() {
           <div className="grid grid-cols-2 gap-10 lg:col-span-6 lg:grid-cols-3">
             <FooterCol title="Explore" links={[
               { to: "/about", label: "About" },
-              
               { to: "/impact", label: "Impact" },
               { to: "/projects", label: "Projects" },
               { to: "/gallery", label: "Gallery" },
+              { to: "/news", label: "News & Events" },
             ]} />
             <FooterCol title="Engage" links={[
               { to: "/donate", label: "Donate" },
