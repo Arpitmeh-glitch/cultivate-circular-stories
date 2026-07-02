@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VolunteerRouteImport } from './routes/volunteer'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as NewsRouteImport } from './routes/news'
 import { Route as ImpactRouteImport } from './routes/impact'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as DonateRouteImport } from './routes/donate'
@@ -27,6 +28,11 @@ const VolunteerRoute = VolunteerRouteImport.update({
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImpactRoute = ImpactRouteImport.update({
@@ -73,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/donate': typeof DonateRoute
   '/gallery': typeof GalleryRoute
   '/impact': typeof ImpactRoute
+  '/news': typeof NewsRoute
   '/projects': typeof ProjectsRoute
   '/volunteer': typeof VolunteerRoute
 }
@@ -84,6 +91,7 @@ export interface FileRoutesByTo {
   '/donate': typeof DonateRoute
   '/gallery': typeof GalleryRoute
   '/impact': typeof ImpactRoute
+  '/news': typeof NewsRoute
   '/projects': typeof ProjectsRoute
   '/volunteer': typeof VolunteerRoute
 }
@@ -96,6 +104,7 @@ export interface FileRoutesById {
   '/donate': typeof DonateRoute
   '/gallery': typeof GalleryRoute
   '/impact': typeof ImpactRoute
+  '/news': typeof NewsRoute
   '/projects': typeof ProjectsRoute
   '/volunteer': typeof VolunteerRoute
 }
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
     | '/donate'
     | '/gallery'
     | '/impact'
+    | '/news'
     | '/projects'
     | '/volunteer'
   fileRoutesByTo: FileRoutesByTo
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
     | '/donate'
     | '/gallery'
     | '/impact'
+    | '/news'
     | '/projects'
     | '/volunteer'
   id:
@@ -131,6 +142,7 @@ export interface FileRouteTypes {
     | '/donate'
     | '/gallery'
     | '/impact'
+    | '/news'
     | '/projects'
     | '/volunteer'
   fileRoutesById: FileRoutesById
@@ -143,6 +155,7 @@ export interface RootRouteChildren {
   DonateRoute: typeof DonateRoute
   GalleryRoute: typeof GalleryRoute
   ImpactRoute: typeof ImpactRoute
+  NewsRoute: typeof NewsRoute
   ProjectsRoute: typeof ProjectsRoute
   VolunteerRoute: typeof VolunteerRoute
 }
@@ -161,6 +174,13 @@ declare module '@tanstack/react-router' {
       path: '/projects'
       fullPath: '/projects'
       preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/impact': {
@@ -223,19 +243,10 @@ const rootRouteChildren: RootRouteChildren = {
   DonateRoute: DonateRoute,
   GalleryRoute: GalleryRoute,
   ImpactRoute: ImpactRoute,
+  NewsRoute: NewsRoute,
   ProjectsRoute: ProjectsRoute,
   VolunteerRoute: VolunteerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
