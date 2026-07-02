@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 export type TeamMember = {
   name: string;
   role: string;
   photo?: string;
+  bio?: string;
 };
 
 export function TeamCarousel({ members }: { members: TeamMember[] }) {
@@ -19,6 +21,7 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
     moved: false,
   });
   const [halfWidth, setHalfWidth] = useState(0);
+  const [active, setActive] = useState<TeamMember | null>(null);
 
   // Duplicate the list for a seamless loop
   const loop = [...members, ...members];
@@ -37,13 +40,13 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
     const scroller = scrollerRef.current;
     if (!scroller || halfWidth === 0) return;
 
-    const speed = 0.5; // px per frame at ~60fps -> slow & premium
+    const speed = 0.5;
     let last = performance.now();
 
     const tick = (now: number) => {
       const dt = Math.min(now - last, 64);
       last = now;
-      if (!pausedRef.current && !dragState.current.active) {
+      if (!pausedRef.current && !dragState.current.active && !active) {
         scroller.scrollLeft += speed * (dt / 16.6667);
       }
       if (scroller.scrollLeft >= halfWidth) {
@@ -57,7 +60,7 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [halfWidth]);
+  }, [halfWidth, active]);
 
   const pauseTransient = (ms = 1200) => {
     pausedRef.current = true;
@@ -106,7 +109,6 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
       onMouseLeave={() => (pausedRef.current = false)}
       onWheel={() => pauseTransient(1200)}
     >
-      {/* edge fades */}
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent" />
       <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent" />
 
@@ -125,15 +127,80 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
           style={{ width: "max-content" }}
         >
           {loop.map((m, i) => (
-            <TeamCard key={`${m.name}-${i}`} member={m} index={i % members.length} />
+            <TeamCard
+              key={`${m.name}-${i}`}
+              member={m}
+              index={i % members.length}
+              onOpen={() => {
+                if (dragState.current.moved) return;
+                setActive(m);
+              }}
+            />
           ))}
         </div>
       </div>
+
+      <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
+        <DialogContent className="max-w-3xl overflow-hidden p-0 border-border bg-background">
+          {active && (
+            <div className="grid gap-0 sm:grid-cols-5 max-h-[85vh] overflow-y-auto">
+              <div className="relative sm:col-span-2 bg-secondary">
+                <div className="aspect-[4/5] w-full sm:h-full">
+                  {active.photo ? (
+                    <img
+                      src={active.photo}
+                      alt={active.name}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-secondary to-muted">
+                      <span className="font-display text-7xl font-semibold text-primary/30">
+                        {active.name
+                          .split(" ")
+                          .map((p) => p[0])
+                          .slice(0, 2)
+                          .join("")
+                          .toUpperCase()}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="sm:col-span-3 p-8 lg:p-10">
+                <p className="eyebrow text-accent">Team</p>
+                <DialogTitle asChild>
+                  <h3 className="mt-4 font-display text-2xl font-semibold text-primary lg:text-3xl leading-tight">
+                    {active.name}
+                  </h3>
+                </DialogTitle>
+                <DialogDescription asChild>
+                  <p className="mt-2 text-sm font-medium text-primary/70">{active.role}</p>
+                </DialogDescription>
+                {active.bio && (
+                  <div className="mt-6 border-t border-border pt-6">
+                    <p className="text-[15px] leading-relaxed text-muted-foreground whitespace-pre-line">
+                      {active.bio}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
 
-function TeamCard({ member, index }: { member: TeamMember; index: number }) {
+function TeamCard({
+  member,
+  index,
+  onOpen,
+}: {
+  member: TeamMember;
+  index: number;
+  onOpen: () => void;
+}) {
   const initials = member.name
     .split(" ")
     .map((p) => p[0])
@@ -142,9 +209,11 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
     .toUpperCase();
 
   return (
-    <article
-      className="group relative shrink-0 w-[260px] sm:w-[280px] lg:w-[300px] rounded-sm border border-border bg-background overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(16,59,45,0.35)] hover:border-primary/40"
-      draggable={false}
+    <button
+      type="button"
+      onClick={onOpen}
+      className="group relative shrink-0 w-[260px] sm:w-[280px] lg:w-[300px] rounded-sm border border-border bg-background overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(16,59,45,0.35)] hover:border-primary/40 text-left"
+      aria-label={`View profile of ${member.name}`}
     >
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-secondary">
         {member.photo ? (
@@ -168,6 +237,6 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
         <h3 className="font-display text-lg font-semibold text-primary leading-tight">{member.name}</h3>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{member.role}</p>
       </div>
-    </article>
+    </button>
   );
 }
