@@ -18,13 +18,13 @@ export const Route = createFileRoute("/impact")({
 });
 
 const STATS: { n: number; display: string; l: string }[] = [
-  { n: 10, display: "10+", l: "Years" },
-  { n: 5, display: "5", l: "Districts" },
-  { n: 17, display: "17", l: "Blocks" },
-  { n: 12500, display: "12,500+", l: "Community Volunteers" },
-  { n: 1100000, display: "1.1 Mn", l: "People Reached" },
-  { n: 600000, display: "600K", l: "Lives Impacted" },
-  { n: 1300000, display: "1.3 Mn", l: "Unique Interventions Delivered" },
+  { n: 6, display: "6", l: "Years" },
+  { n: 5000, display: "5,000", l: "Community Volunteers" },
+  { n: 1500, display: "1,500 MT+", l: "Waste Diverted from Landfills" },
+  { n: 1500000, display: "1.5M+", l: "People Reached" },
+  { n: 210000, display: "210K", l: "Lives Impacted" },
+  { n: 9, display: "9", l: "Districts" },
+  { n: 17, display: "17", l: "Urban Local Bodies" },
 ];
 
 const IMPACT_CARDS: { t: string; items: string[] }[] = [
