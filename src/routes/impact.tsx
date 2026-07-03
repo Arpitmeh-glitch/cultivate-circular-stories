@@ -18,13 +18,13 @@ export const Route = createFileRoute("/impact")({
 });
 
 const STATS: { n: number; display: string; l: string }[] = [
-  { n: 10, display: "10+", l: "Years" },
-  { n: 5, display: "5", l: "Districts" },
-  { n: 17, display: "17", l: "Blocks" },
-  { n: 12500, display: "12,500+", l: "Community Volunteers" },
-  { n: 1100000, display: "1.1 Mn", l: "People Reached" },
-  { n: 600000, display: "600K", l: "Lives Impacted" },
-  { n: 1300000, display: "1.3 Mn", l: "Unique Interventions Delivered" },
+  { n: 6, display: "6", l: "Years" },
+  { n: 5000, display: "5,000", l: "Community Volunteers" },
+  { n: 1500, display: "1,500 MT+", l: "Waste Diverted from Landfills" },
+  { n: 1500000, display: "1.5M+", l: "People Reached" },
+  { n: 210000, display: "210K", l: "Lives Impacted" },
+  { n: 9, display: "9", l: "Districts" },
+  { n: 17, display: "17", l: "Urban Local Bodies" },
 ];
 
 const IMPACT_CARDS: { t: string; items: string[] }[] = [
@@ -95,8 +95,9 @@ function ImpactPage() {
           <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
             {STATS.map((s, i) => (
               <FadeUp key={s.l} delay={i * 80}>
-                <div className="border-t border-primary/20 pt-6">
-                  <p className="font-display text-[64px] font-semibold leading-none tracking-tight text-primary lg:text-[88px]">
+                <div className="group relative border-t border-primary/20 pt-6 transition-all duration-500 hover:border-accent">
+                  <span className="absolute left-0 top-0 h-px w-0 bg-accent transition-all duration-700 ease-out group-hover:w-full" />
+                  <p className="font-display text-[64px] font-semibold leading-none tracking-tight text-primary transition-transform duration-500 group-hover:-translate-y-1 group-hover:text-accent lg:text-[88px]">
                     <Counter to={s.n} display={s.display} />
                   </p>
                   <p className="mt-4 text-sm font-medium uppercase tracking-[0.18em] text-primary/70">{s.l}</p>
