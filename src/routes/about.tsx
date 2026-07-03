@@ -214,6 +214,8 @@ const PRINCIPLES = [
     t: "Philosophy",
     d: "Sustainable cities emerge from the bottom up — by unlocking the knowledge, labor, and innovation already present in communities, and by treating waste as a design flaw in our urban metabolism.",
   },
+];
+
 const PROGRAMS: {
   title: string;
   body: string;
