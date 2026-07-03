@@ -214,7 +214,36 @@ const PRINCIPLES = [
     t: "Philosophy",
     d: "Sustainable cities emerge from the bottom up — by unlocking the knowledge, labor, and innovation already present in communities, and by treating waste as a design flaw in our urban metabolism.",
   },
+const PROGRAMS: {
+  title: string;
+  body: string;
+  bullets: string[];
+  closing?: string;
+  link?: string;
+}[] = [
+  {
+    title: "Project Samagrah",
+    body: "The word Samagrah literally translates to \"whole\" or \"holistic\", and that is exactly what the program represents.\n\nBorn out of the belief that the waste crisis cannot be solved through fragmented interventions, Project Samagrah addresses waste management through:",
+    bullets: [
+      "A systemic, people-first strategy.",
+      "Empowerment of Urban Local Bodies to engineer optimized waste management infrastructure.",
+      "Strengthening market linkages to ensure economic viability for recycled materials.",
+    ],
+    closing: "By closing the loop on waste, the project advances a circular economy that addresses the interconnected triple planetary crises of climate change, biodiversity loss, and pollution, while creating cleaner cities, resilient local institutions, and sustainable livelihoods for women.",
+    link: "/news",
+  },
+  {
+    title: "Project Prakriti",
+    body: "Project Prakriti is the mad scientist in our backyard.\n\nThrough the project, we help rural women build niche sustainability businesses and empower them to lead their own journeys through:",
+    bullets: [
+      "Skill training",
+      "Entrepreneurship development",
+      "Mentorship",
+    ],
+    closing: "Our products are not only beautiful and intricate but are also created with mindfulness and care.",
+  },
 ];
+
 
 const CONVICTIONS = [
   {
