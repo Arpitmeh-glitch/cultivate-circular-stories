@@ -95,8 +95,9 @@ function ImpactPage() {
           <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
             {STATS.map((s, i) => (
               <FadeUp key={s.l} delay={i * 80}>
-                <div className="border-t border-primary/20 pt-6">
-                  <p className="font-display text-[64px] font-semibold leading-none tracking-tight text-primary lg:text-[88px]">
+                <div className="group relative border-t border-primary/20 pt-6 transition-all duration-500 hover:border-accent">
+                  <span className="absolute left-0 top-0 h-px w-0 bg-accent transition-all duration-700 ease-out group-hover:w-full" />
+                  <p className="font-display text-[64px] font-semibold leading-none tracking-tight text-primary transition-transform duration-500 group-hover:-translate-y-1 group-hover:text-accent lg:text-[88px]">
                     <Counter to={s.n} display={s.display} />
                   </p>
                   <p className="mt-4 text-sm font-medium uppercase tracking-[0.18em] text-primary/70">{s.l}</p>
