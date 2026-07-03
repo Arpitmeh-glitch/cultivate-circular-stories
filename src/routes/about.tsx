@@ -267,7 +267,7 @@ const TEAM = [
     name: "Sakshi Singh Sirari",
     role: "Founder and Managing Trustee",
     photo: images.founder.founderPhoto,
-    bio: "A gender-informed social development practitioner, Sakshi graduated from Tata Institute of Social Sciences before navigating through varied platforms of social work for over a decade. After a two-year stint as a consultant for the Ministry of Women & Child Development, Government of India, Sakshi founded Green Future Collective with a vision to build sustainability across new, rapidly urbanising towns and cities across India.",
+    bio: "A gender-informed social development practitioner, Sakshi graduated from Tata Institute of Social Sciences before navigating through varied platforms of social work for over a decade. After a two-year stint as a consultant for the Ministry of Women & Child Development, Government of India, Sakshi started Green Future Collective with a vision to build sustainability across new, rapidly urbanising towns and cities across India.",
   },
   {
     name: "Poorvi Gupta",
@@ -277,36 +277,36 @@ const TEAM = [
   {
     name: "Pramila Singh",
     role: "Secretary | Lifelong Educator",
-    bio: "An English Master's graduate from Lucknow University, Pramila has spent over 35 years educating children across India. She has taught more than 100,000 students and currently serves as a senior teacher at City Montessori School, Lucknow.",
+    bio: "An English Master's graduate from Lucknow University, Pramila has spent over 35 years educating children across India. She has educated more than 100,000 students and currently serves as a senior teacher at City Montessori School, Lucknow.",
   },
   {
     name: "Ishan Jain",
     role: "Principal Legal Advisor",
-    bio: "A Campus Law Centre (Delhi University) graduate, Ishan has been practicing as a civil and corporate lawyer at the Supreme Court of India since 2008. He serves as the principal legal advisor to the Board of Trustees.",
+    bio: "A Campus Law Centre (Delhi University) graduate, Ishan has been practicing as a civil and corporate lawyer at the Supreme Court of India since 2008. He supports the mission and serves as the principal legal advisor to the Board of Trustees.",
   },
   {
     name: "Rachit Tiwari",
     role: "Lead, Research and Strategic Partnerships",
-    bio: "An MSc graduate in Environment and Sustainable Development, Rachit leads collaborations and program design. He also works in ethnography and political ecology research and mentors interns and fellows within the organization.",
+    bio: "An MSc graduate in Environment and Sustainable Development, Rachit heads collaborations and program design. He also occasionally dabbles in ethnography and political ecology research. To interns and fellows, he is the one you need to impress!",
   },
   {
     name: "Kajal Yadav",
     role: "Program Officer, Samagrah",
-    bio: "Kajal Yadav is a passionate social activist, environmental advocate, and dedicated community leader associated with global initiatives including Art of Giving and Blue Orb Foundation. She supports the efficient implementation of Green Future Collective's program initiatives.",
+    bio: "Kajal Yadav is a passionate social activist, environmental advocate, and dedicated community leader associated with global initiatives such as Art of Giving and Blue Orb Foundation. Kajal works on the efficient implementation of Green Future Collective's program initiatives.",
   },
   {
     name: "Vikrant Sikarwar",
     role: "Regional Program Coordinator",
-    bio: "With over 12 years of experience in logistics, Vikrant manages daily operations, government liaison, and regional coordination. His operational expertise and leadership strengthen the organization's field implementation.",
+    bio: "Vikrant Sikarwar holds over 12 years of experience in the logistics sector and is our Man Friday. He manages daily operational complexities and government liaison. With exceptional regional insight and team management skills, Vikrant drives strength within the core team.",
   },
   {
     name: "Pragati Tripathi",
     role: "Content Strategist",
-    bio: "Pragati combines data expertise with social impact. Through experience in data management and community engagement, she transforms insights into meaningful communication and change.",
+    bio: "Pragati combines data expertise with social impact. With experience in data management and community engagement, she works to transform insights into meaningful change.",
   },
   {
     name: "Aquib Hasan",
     role: "Community Supervisor",
-    bio: "A B.Tech graduate in Biotechnology with seven years of experience in the Food and Quality sector, Aquib ensures strong community participation, team motivation, and effective on-ground coordination.",
+    bio: "A B.Tech graduate in Biotechnology with seven years of experience in the Food and Quality sector, Aquib ensures team participation and motivation at all times through his meticulous attention to detail.",
   },
 ];
