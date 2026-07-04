@@ -31,7 +31,7 @@ export function CollageHero() {
         <img
           src={images.community.teamPhoto}
           alt="Green Future Collective community plog drive in Uttar Pradesh"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain"
           loading="eager"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/15 via-transparent to-transparent" />
