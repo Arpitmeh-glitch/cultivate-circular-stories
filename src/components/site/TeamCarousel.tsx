@@ -111,7 +111,8 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
     pauseTransient(800);
   };
 
-  const onCardPointerUp = (member: TeamMember) => {
+  const onCardPointerUp = (member: TeamMember, pointerType: string) => {
+    if (pointerType === "mouse") return;
     openMember(member);
   };
 
@@ -145,7 +146,7 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
               member={m}
               index={i % members.length}
               onOpen={() => openMember(m)}
-              onPointerOpen={() => onCardPointerUp(m)}
+              onPointerOpen={(pointerType) => onCardPointerUp(m, pointerType)}
             />
           ))}
         </div>
@@ -212,7 +213,7 @@ function TeamCard({
   member: TeamMember;
   index: number;
   onOpen: () => void;
-  onPointerOpen: () => void;
+  onPointerOpen: (pointerType: string) => void;
 }) {
   const initials = member.name
     .split(" ")
@@ -225,7 +226,7 @@ function TeamCard({
     <button
       type="button"
       onClick={onOpen}
-      onPointerUp={onPointerOpen}
+      onPointerUp={(e) => onPointerOpen(e.pointerType)}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
