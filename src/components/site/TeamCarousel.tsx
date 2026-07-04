@@ -84,7 +84,6 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
       startScroll: scroller.scrollLeft,
       moved: false,
     };
-    scroller.setPointerCapture(e.pointerId);
   };
 
   const onPointerMove = (e: React.PointerEvent) => {
@@ -92,7 +91,12 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
     const scroller = scrollerRef.current;
     if (!scroller) return;
     const dx = e.clientX - dragState.current.startX;
-    if (Math.abs(dx) > 3) dragState.current.moved = true;
+    if (Math.abs(dx) > 3 && !dragState.current.moved) {
+      dragState.current.moved = true;
+      try {
+        scroller.setPointerCapture(e.pointerId);
+      } catch {}
+    }
     scroller.scrollLeft = dragState.current.startScroll - dx;
   };
 
