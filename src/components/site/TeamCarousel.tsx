@@ -70,6 +70,11 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
     }, ms);
   };
 
+  const openMember = (member: TeamMember) => {
+    if (dragState.current.moved) return;
+    setActive(member);
+  };
+
   const onPointerDown = (e: React.PointerEvent) => {
     const scroller = scrollerRef.current;
     if (!scroller) return;
@@ -79,7 +84,6 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
       startScroll: scroller.scrollLeft,
       moved: false,
     };
-    scroller.setPointerCapture(e.pointerId);
   };
 
   const onPointerMove = (e: React.PointerEvent) => {
@@ -87,7 +91,12 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
     const scroller = scrollerRef.current;
     if (!scroller) return;
     const dx = e.clientX - dragState.current.startX;
-    if (Math.abs(dx) > 3) dragState.current.moved = true;
+    if (Math.abs(dx) > 3 && !dragState.current.moved) {
+      dragState.current.moved = true;
+      try {
+        scroller.setPointerCapture(e.pointerId);
+      } catch {}
+    }
     scroller.scrollLeft = dragState.current.startScroll - dx;
   };
 
@@ -100,6 +109,11 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
       } catch {}
     }
     pauseTransient(800);
+  };
+
+  const onCardPointerUp = (member: TeamMember, pointerType: string) => {
+    if (pointerType === "mouse") return;
+    openMember(member);
   };
 
   return (
@@ -131,10 +145,8 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
               key={`${m.name}-${i}`}
               member={m}
               index={i % members.length}
-              onOpen={() => {
-                if (dragState.current.moved) return;
-                setActive(m);
-              }}
+              onOpen={() => openMember(m)}
+              onPointerOpen={(pointerType) => onCardPointerUp(m, pointerType)}
             />
           ))}
         </div>
@@ -196,10 +208,12 @@ function TeamCard({
   member,
   index,
   onOpen,
+  onPointerOpen,
 }: {
   member: TeamMember;
   index: number;
   onOpen: () => void;
+  onPointerOpen: (pointerType: string) => void;
 }) {
   const initials = member.name
     .split(" ")
@@ -212,6 +226,13 @@ function TeamCard({
     <button
       type="button"
       onClick={onOpen}
+      onPointerUp={(e) => onPointerOpen(e.pointerType)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onOpen();
+        }
+      }}
       className="group relative shrink-0 w-[260px] sm:w-[280px] lg:w-[300px] rounded-sm border border-border bg-background overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(16,59,45,0.35)] hover:border-primary/40 text-left"
       aria-label={`View profile of ${member.name}`}
     >
