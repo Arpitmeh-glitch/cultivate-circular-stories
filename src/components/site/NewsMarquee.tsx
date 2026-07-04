@@ -11,7 +11,12 @@ const PHOTOS = [
 
 function PhotoCard({ src }: { src: string }) {
   return (
-    <div className="group/card relative h-[320px] w-[480px] shrink-0 overflow-hidden rounded-sm border border-border bg-secondary transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_30px_60px_-30px_rgba(16,59,45,0.35)] sm:h-[380px] sm:w-[580px]">
+    <a
+      href={src}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group/card relative h-[320px] w-[480px] shrink-0 overflow-hidden rounded-sm border border-border bg-secondary transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_30px_60px_-30px_rgba(16,59,45,0.35)] sm:h-[380px] sm:w-[580px]"
+    >
       <img
         src={src}
         alt="Press coverage"
@@ -23,7 +28,7 @@ function PhotoCard({ src }: { src: string }) {
       />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent" />
       <div className="pointer-events-none absolute right-3 top-3 h-10 w-10 rounded-full bg-accent/80 mix-blend-multiply" />
-    </div>
+    </a>
   );
 }
 

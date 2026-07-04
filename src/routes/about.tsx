@@ -272,41 +272,49 @@ const TEAM = [
   {
     name: "Poorvi Gupta",
     role: "Vice President | Independent Journalist | TEDx Speaker",
+    photo: "/images/members/member2.png",
     bio: "Gender-focused journalist with a decade-long experience working with globally acclaimed publications including Al Jazeera, Nikkei Asia, Devex, The Polis Project, The Hindu, Article-14, BBC India, and Media Action Against Rape led by Bournemouth University and UNESCO, among others.",
   },
   {
     name: "Pramila Singh",
     role: "Secretary | Lifelong Educator",
+    photo: "/images/members/member3.png",
     bio: "An English Master's graduate from Lucknow University, Pramila has spent over 35 years educating children across India. She has educated more than 100,000 students and currently serves as a senior teacher at City Montessori School, Lucknow.",
   },
   {
     name: "Ishan Jain",
     role: "Principal Legal Advisor",
+    photo: "/images/members/member4.png",
     bio: "A Campus Law Centre (Delhi University) graduate, Ishan has been practicing as a civil and corporate lawyer at the Supreme Court of India since 2008. He supports the mission and serves as the principal legal advisor to the Board of Trustees.",
   },
   {
     name: "Rachit Tiwari",
     role: "Lead, Research and Strategic Partnerships",
+    photo: "/images/members/member5.png",
     bio: "An MSc graduate in Environment and Sustainable Development, Rachit heads collaborations and program design. He also occasionally dabbles in ethnography and political ecology research. To interns and fellows, he is the one you need to impress!",
   },
   {
     name: "Kajal Yadav",
     role: "Program Officer, Samagrah",
+    photo: "/images/members/member6.png",
     bio: "Kajal Yadav is a passionate social activist, environmental advocate, and dedicated community leader associated with global initiatives such as Art of Giving and Blue Orb Foundation. Kajal works on the efficient implementation of Green Future Collective's program initiatives.",
   },
   {
     name: "Vikrant Sikarwar",
     role: "Regional Program Coordinator",
+    photo: "/images/members/member7.png",
     bio: "Vikrant Sikarwar holds over 12 years of experience in the logistics sector and is our Man Friday. He manages daily operational complexities and government liaison. With exceptional regional insight and team management skills, Vikrant drives strength within the core team.",
   },
   {
     name: "Pragati Tripathi",
     role: "Content Strategist",
+    photo: "/images/members/member8.png",
     bio: "Pragati combines data expertise with social impact. With experience in data management and community engagement, she works to transform insights into meaningful change.",
   },
   {
     name: "Aquib Hasan",
     role: "Community Supervisor",
+    photo: "/images/members/member9.png",
     bio: "A B.Tech graduate in Biotechnology with seven years of experience in the Food and Quality sector, Aquib ensures team participation and motivation at all times through his meticulous attention to detail.",
   },
 ];
