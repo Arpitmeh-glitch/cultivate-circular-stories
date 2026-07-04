@@ -111,6 +111,10 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
     pauseTransient(800);
   };
 
+  const onCardPointerUp = (member: TeamMember) => {
+    openMember(member);
+  };
+
   return (
     <div
       className="relative -mx-6 lg:-mx-12"
@@ -141,6 +145,7 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
               member={m}
               index={i % members.length}
               onOpen={() => openMember(m)}
+              onPointerOpen={() => onCardPointerUp(m)}
             />
           ))}
         </div>
@@ -202,10 +207,12 @@ function TeamCard({
   member,
   index,
   onOpen,
+  onPointerOpen,
 }: {
   member: TeamMember;
   index: number;
   onOpen: () => void;
+  onPointerOpen: () => void;
 }) {
   const initials = member.name
     .split(" ")
@@ -218,6 +225,7 @@ function TeamCard({
     <button
       type="button"
       onClick={onOpen}
+      onPointerUp={onPointerOpen}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
