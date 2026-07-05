@@ -62,6 +62,12 @@ function ContactPage() {
               >
                 Volunteer
               </Link>
+              <Link
+                to="/fellowship"
+                className="inline-flex items-center rounded-full border border-primary/25 px-5 py-2.5 text-sm font-medium text-primary hover:bg-secondary"
+              >
+                Fellowship
+              </Link>
               <a
                 href="#contact-form"
                 className="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"

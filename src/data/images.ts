@@ -39,6 +39,7 @@ export const images = {
     koodadhanAppPilotLaunch2024: "/images/projects/koodadhan-app-pilot-launch-2024.jpg",
     swachhtaYoddhaCampaign2025: "/images/projects/swachhta-yoddha-campaign-2025.jpg",
     swachhataSarathiClubWorkshop2025: "/images/projects/swachhata-sarathi-club-workshop-2025.jpg",
+    susSwap: "/images/projects/sus-swap.jpg",
   },
   partners: {
     nagarNigamAligarh: "/images/partners/nagar-nigam-aligarh.png",

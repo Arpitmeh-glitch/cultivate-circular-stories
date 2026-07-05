@@ -70,10 +70,10 @@ export function SiteFooter() {
               { to: "/gallery", label: "Gallery" },
               { to: "/news", label: "News & Events" },
             ]} />
-            <FooterCol title="Engage" links={[
-              { to: "/donate", label: "Donate" },
-              { to: "/contact", label: "Contact" },
-            ]} />
+              <FooterCol title="Engage" links={[ 
+                { to: "/donate", label: "Donate" },
+                { to: "/collaborate", label: "Partner with us" },
+              ]} />
             <div>
               <p className="eyebrow text-primary-foreground/60">Based in</p>
               <p className="mt-4 text-sm leading-relaxed text-primary-foreground/80">

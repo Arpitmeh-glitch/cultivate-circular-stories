@@ -14,6 +14,7 @@ import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as ImpactRouteImport } from './routes/impact'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as FellowshipRouteImport } from './routes/fellowship'
 import { Route as DonateRouteImport } from './routes/donate'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CollaborateRouteImport } from './routes/collaborate'
@@ -43,6 +44,11 @@ const ImpactRoute = ImpactRouteImport.update({
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FellowshipRoute = FellowshipRouteImport.update({
+  id: '/fellowship',
+  path: '/fellowship',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DonateRoute = DonateRouteImport.update({
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/collaborate': typeof CollaborateRoute
   '/contact': typeof ContactRoute
   '/donate': typeof DonateRoute
+  '/fellowship': typeof FellowshipRoute
   '/gallery': typeof GalleryRoute
   '/impact': typeof ImpactRoute
   '/news': typeof NewsRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/collaborate': typeof CollaborateRoute
   '/contact': typeof ContactRoute
   '/donate': typeof DonateRoute
+  '/fellowship': typeof FellowshipRoute
   '/gallery': typeof GalleryRoute
   '/impact': typeof ImpactRoute
   '/news': typeof NewsRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/collaborate': typeof CollaborateRoute
   '/contact': typeof ContactRoute
   '/donate': typeof DonateRoute
+  '/fellowship': typeof FellowshipRoute
   '/gallery': typeof GalleryRoute
   '/impact': typeof ImpactRoute
   '/news': typeof NewsRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/collaborate'
     | '/contact'
     | '/donate'
+    | '/fellowship'
     | '/gallery'
     | '/impact'
     | '/news'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/collaborate'
     | '/contact'
     | '/donate'
+    | '/fellowship'
     | '/gallery'
     | '/impact'
     | '/news'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/collaborate'
     | '/contact'
     | '/donate'
+    | '/fellowship'
     | '/gallery'
     | '/impact'
     | '/news'
@@ -153,6 +165,7 @@ export interface RootRouteChildren {
   CollaborateRoute: typeof CollaborateRoute
   ContactRoute: typeof ContactRoute
   DonateRoute: typeof DonateRoute
+  FellowshipRoute: typeof FellowshipRoute
   GalleryRoute: typeof GalleryRoute
   ImpactRoute: typeof ImpactRoute
   NewsRoute: typeof NewsRoute
@@ -195,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/gallery'
       fullPath: '/gallery'
       preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fellowship': {
+      id: '/fellowship'
+      path: '/fellowship'
+      fullPath: '/fellowship'
+      preLoaderRoute: typeof FellowshipRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/donate': {
@@ -241,6 +261,7 @@ const rootRouteChildren: RootRouteChildren = {
   CollaborateRoute: CollaborateRoute,
   ContactRoute: ContactRoute,
   DonateRoute: DonateRoute,
+  FellowshipRoute: FellowshipRoute,
   GalleryRoute: GalleryRoute,
   ImpactRoute: ImpactRoute,
   NewsRoute: NewsRoute,
