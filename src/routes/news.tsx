@@ -433,7 +433,8 @@ function NewsPage() {
           <div className="relative mt-16">
             {/* Connecting line (desktop) */}
             <div className="pointer-events-none absolute left-0 right-0 top-8 hidden h-px bg-border md:block" />
-            <div className="pointer-events-none absolute left-0 top-8 hidden h-px bg-primary md:block animate-[grow-line_2.2s_ease-out_forwards]" style={{ width: 0 }} />
+            <div className="pointer-events-none absolute left-0 top-8 hidden h-px w-full origin-left scale-x-0 bg-primary md:block in-view:scale-x-100 transition-transform duration-[2200ms] ease-out" />
+
 
             <ol className="grid gap-8 sm:grid-cols-2 md:grid-cols-6 md:gap-4">
               {PROCESS.map((step, i) => (
