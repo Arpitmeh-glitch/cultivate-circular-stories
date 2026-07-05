@@ -42,7 +42,7 @@ function DonatePage() {
                 Your contribution doesn't disappear into overhead. It pays for a
                 week of segregation training, a shared workshop's electricity, a
                 school's composting lab, an SHG member's first month of wages.
-                Real systems, in real villages.
+                Real systems, in real cities.
               </p>
             </FadeUp>
             <FadeUp delay={260}>
