@@ -116,7 +116,7 @@ function DonatePage() {
                 </div>
                 <dl className="mt-10 grid gap-4 border-t border-border pt-6 text-sm">
                   <Row k="UPI ID" v="greenfuture@upi" />
-                  <Row k="Account name" v="Green Future Collective" />
+                  <Row k="Account name" v="GREEN FUTURE COLLECTIVE TRUST" />
                 </dl>
                 <p className="mt-6 text-xs italic text-muted-foreground">
                   Replace with verified UPI ID & QR before launch.
@@ -130,10 +130,10 @@ function DonatePage() {
                 <p className="eyebrow text-accent">02 · Bank transfer</p>
                 <h3 className="mt-6 font-display text-3xl font-semibold text-primary">Direct deposit</h3>
                 <dl className="mt-10 space-y-5 border-t border-border pt-6 text-sm">
-                  <Row k="Account name" v="Green Future Collective" />
-                  <Row k="Account number" v="XXXX XXXX XXXX" />
-                  <Row k="IFSC" v="XXXX0000000" />
-                  <Row k="Bank" v="Bank name · Branch" />
+                  <Row k="Account name" v="GREEN FUTURE COLLECTIVE TRUST" />
+                  <Row k="Account number" v=" 5020 0101 1744 62" />
+                  <Row k="IFSC" v=" HDFC0000869" />
+                  <Row k="Bank" v="HDFC Bank ·SHAHJAHANPUR Branch" />
                   <Row k="Type" v="Current account" />
                 </dl>
                 <p className="mt-8 text-sm text-primary/85">
