@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { PartnerModal } from "@/components/site/PartnerModal";
 import { useEffect, useState } from "react";
 import { images } from "@/data/images";
 
@@ -8,7 +9,7 @@ const NAV = [
   { to: "/projects", label: "Projects", hash: undefined },
   { to: "/gallery", label: "Gallery", hash: undefined },
   { to: "/news", label: "News & Events", hash: undefined },
-  { to: "/contact", label: "Contact", hash: undefined },
+  { to: "/collaborate", label: "Partner with us", hash: undefined },
 ] as const;
 
 export function SiteHeader() {
@@ -62,10 +63,10 @@ export function SiteHeader() {
             Donate
           </Link>
           <Link
-            to="/collaborate"
+            to="/contact"
             className="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.03]"
           >
-            Partner with us
+            Careers
           </Link>
         </div>
 
@@ -105,6 +106,7 @@ export function SiteHeader() {
           </nav>
         </div>
       )}
+    <PartnerModal />
     </header>
   );
 }

@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { FadeUp } from "@/components/site/FadeUp";
@@ -140,25 +140,11 @@ type UpcomingItem = {
 
 const UPCOMING: UpcomingItem[] = [
   {
-    title: "Sustainability Educators' Roundtable",
-    date: "Coming soon",
-    location: "Lucknow, Uttar Pradesh",
+    title: "Sustainability Swap & Exchange Fair",
+    date: "9–10 July 2026",
+    location: "City Park, Shahjahanpur, Uttar Pradesh",
     description:
-      "A working session with teachers and program leads to shape our next sustainability curriculum module.",
-  },
-  {
-    title: "Women-Led Enterprise Showcase",
-    date: "Coming soon",
-    location: "Shahjahanpur, Uttar Pradesh",
-    description:
-      "A community showcase featuring products, stories, and outcomes from our women-led enterprises.",
-  },
-  {
-    title: "City-Scale Waste Systems Workshop",
-    date: "Coming soon",
-    location: "To be announced",
-    description:
-      "A convening on integrating informal workers into municipal waste systems under SDG 11.",
+      "A community swap fair encouraging reuse, exchange, and donation of everyday items to reduce unnecessary waste and strengthen circular economy participation.",
   },
 ];
 
@@ -652,13 +638,13 @@ function NewsPage() {
                     {item.description}
                   </p>
                   <div className="mt-auto pt-8">
-                    <button
-                      type="button"
+                    <Link
+                      to="/collaborate"
                       className="inline-flex items-center gap-3 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.03]"
                     >
-                      Register interest
+                      Partner with us
                       <span aria-hidden>→</span>
-                    </button>
+                    </Link>
                   </div>
                 </article>
               </FadeUp>

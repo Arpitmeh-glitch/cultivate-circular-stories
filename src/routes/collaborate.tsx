@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SectionHero } from "@/components/site/SectionHero";
@@ -82,12 +82,12 @@ function CollaboratePage() {
                 <p className="eyebrow text-accent">Ready to start</p>
                 <h2 className="mt-4 display-lg max-w-[20ch]">Tell us what you want to change.</h2>
               </div>
-              <Link
-                to="/contact"
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent('open-partner-modal'))}
                 className="inline-flex items-center gap-3 rounded-full bg-accent px-7 py-4 text-sm font-semibold text-accent-foreground hover:bg-accent/90"
               >
                 Get in touch <span aria-hidden>→</span>
-              </Link>
+              </button>
             </div>
           </FadeUp>
         </div>
