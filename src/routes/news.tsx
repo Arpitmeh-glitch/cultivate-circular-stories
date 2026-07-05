@@ -282,24 +282,39 @@ function Timeline() {
 
   return (
     <div ref={wrapRef} className="relative mt-16">
-      {/* Center rail (desktop) / left rail (mobile) */}
-      <div className="pointer-events-none absolute left-6 top-0 h-full w-px bg-border md:left-1/2 md:-translate-x-1/2" />
+      {/* Rail base */}
+      <div className="pointer-events-none absolute left-6 top-0 h-full w-[2px] -translate-x-1/2 rounded-full bg-border md:left-1/2" />
+      {/* Rail progress with gradient + glowing head */}
       <div
-        className="pointer-events-none absolute left-6 top-0 w-px bg-primary transition-[height] duration-150 ease-out md:left-1/2 md:-translate-x-1/2"
+        className="pointer-events-none absolute left-6 top-0 w-[2px] -translate-x-1/2 rounded-full bg-gradient-to-b from-accent via-primary to-primary shadow-[0_0_18px_2px_rgba(16,59,45,0.35)] transition-[height] duration-150 ease-out md:left-1/2"
         style={{ height: `${progress * 100}%` }}
-      />
+      >
+        <span className="absolute -bottom-1 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_16px_4px_rgba(191,161,74,0.55)] animate-[pulse_1.6s_ease-in-out_infinite]" />
+      </div>
 
       <ol className="space-y-16 md:space-y-24">
         {TIMELINE.map((item, i) => {
           const isRight = i % 2 === 1;
+          const threshold = (i + 0.35) / TIMELINE.length;
+          const reached = progress >= threshold;
           return (
             <li key={`${item.year}-${item.title}`} className="relative">
               {/* Node */}
               <span
-                className="absolute left-6 top-2 z-10 grid h-4 w-4 -translate-x-1/2 place-items-center rounded-full border-2 border-primary bg-background md:left-1/2"
+                className={[
+                  "absolute left-6 top-2 z-10 grid h-5 w-5 -translate-x-1/2 place-items-center rounded-full border-2 bg-background transition-all duration-500 md:left-1/2",
+                  reached
+                    ? "border-primary bg-primary shadow-[0_0_0_6px_rgba(16,59,45,0.12),0_0_20px_4px_rgba(16,59,45,0.35)] scale-110"
+                    : "border-border scale-100",
+                ].join(" ")}
                 aria-hidden
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                <span
+                  className={[
+                    "h-1.5 w-1.5 rounded-full transition-colors duration-500",
+                    reached ? "bg-background" : "bg-border",
+                  ].join(" ")}
+                />
               </span>
 
               <div
@@ -311,21 +326,37 @@ function Timeline() {
                 <FadeUp>
                   <article
                     className={[
-                      "group ml-14 rounded-sm border border-border bg-background p-6 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_30px_60px_-30px_rgba(16,59,45,0.35)] md:ml-0",
+                      "group relative ml-14 rounded-sm border border-border bg-background p-6 transition-all duration-700 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_30px_60px_-30px_rgba(16,59,45,0.35)] md:ml-0",
                       isRight ? "md:mr-0 md:ml-8" : "md:ml-0 md:mr-8",
+                      reached
+                        ? "opacity-100 translate-x-0 border-primary/30 shadow-[0_20px_50px_-30px_rgba(16,59,45,0.4)]"
+                        : `opacity-70 ${isRight ? "md:translate-x-6" : "md:-translate-x-6"}`,
                     ].join(" ")}
                   >
+                    {/* Connector dash from card to rail (desktop) */}
+                    <span
+                      className={[
+                        "pointer-events-none absolute top-4 hidden h-px transition-all duration-500 md:block",
+                        reached ? "bg-primary/50 w-8" : "bg-border w-6",
+                        isRight ? "-left-8" : "-right-8",
+                      ].join(" ")}
+                    />
                     {item.image && (
                       <div className="mb-5 aspect-[16/10] w-full overflow-hidden rounded-sm bg-muted">
                         <img
                           src={item.image}
                           alt={item.title}
                           loading="lazy"
-                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                          className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06]"
                         />
                       </div>
                     )}
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">
+                    <p
+                      className={[
+                        "text-[10px] font-semibold uppercase tracking-[0.18em] transition-colors duration-500",
+                        reached ? "text-accent" : "text-primary/40",
+                      ].join(" ")}
+                    >
                       {item.year}
                     </p>
                     <h3 className="mt-3 font-display text-xl font-semibold leading-tight text-primary">
@@ -344,6 +375,7 @@ function Timeline() {
     </div>
   );
 }
+
 
 // ------------------------------ PAGE ------------------------------
 
