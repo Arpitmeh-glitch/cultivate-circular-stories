@@ -108,7 +108,8 @@
   font-weight: 600;
   letter-spacing: -0.04em;
   line-height: 0.9;
-  font-size: clamp(3.5rem, 9vw, 7.5rem);
+  /* Increased for larger page titles */
+  font-size: clamp(4rem, 9vw, 8.5rem);
 }
 
 @utility display-lg {
@@ -116,14 +117,16 @@
   font-weight: 600;
   letter-spacing: -0.035em;
   line-height: 0.95;
-  font-size: clamp(2.75rem, 6vw, 5rem);
+  /* Increased for prominent section headings */
+  font-size: clamp(3.25rem, 6.5vw, 6rem);
 }
 
 @utility eyebrow {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  /* Slightly larger for improved hierarchy on section headings */
+  font-size: 0.875rem;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 

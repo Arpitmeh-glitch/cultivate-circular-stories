@@ -19,24 +19,74 @@ export const Route = createFileRoute("/projects")({
 
 const PROJECTS = [
   {
-    tag: "Community Clean-Up & Awareness",
-    title: "Bada Mangal Plog Drive",
-    date: "16 June 2026",
-    location: "Kachiyani Kheda Mandir, Tilhar, Uttar Pradesh",
-    challenge: "Large public gatherings generated litter around the temple premises, creating cleanliness and waste management challenges.",
-    solution: "Green Future Collective organized a community-led plog drive, combining waste collection with awareness on cleanliness and responsible disposal practices.",
-    impact: "The initiative brought volunteers and community members together to create a cleaner public space while promoting environmental responsibility and civic participation.",
-    image: images.projects.badaMangal,
+    tag: "Thought Leadership · Environmental Advocacy",
+    title: "World Environment Day 2021 Campaign",
+    date: "June 2021",
+    location: "Shahjahanpur, Uttar Pradesh",
+    challenge: "Building sustainable cities requires stronger collaboration between citizens, institutions, and environmental initiatives.",
+    solution: "Curated a public awareness campaign around the theme “Reimagine • Recreate • Restore,” highlighting circular economy principles, ecosystem restoration, urban forestry, and citizen-led waste management through expert insights and public engagement.",
+    impact: "Encouraged environmental stewardship by connecting public policy with practical actions that citizens can adopt to create cleaner, greener communities.",
+    image: images.projects.worldEnvironmentDay2021,
+  },
+  {
+    tag: "Water Conservation · Public Awareness",
+    title: "World Wetlands Day Campaign",
+    date: "February 2022",
+    location: "India",
+    challenge: "Growing pressure on freshwater resources and declining awareness of wetlands called for practical solutions that households could easily adopt.",
+    solution: "Launched a public awareness campaign promoting affordable water-saving technologies and everyday conservation practices while educating citizens about the ecological importance of wetlands.",
+    impact: "Inspired individuals and families to adopt water-efficient habits and strengthened awareness of wetland conservation through simple, actionable solutions.",
+    image: images.projects.worldWetlandsDay2022,
+  },
+  {
+    tag: "Public Engagement · Circular Economy",
+    title: "Koodadhan 2022 – Sustainability Festival",
+    date: "6–8 March 2022",
+    location: "Shaheed Park, Shahjahanpur, Uttar Pradesh",
+    challenge: "Public awareness around sustainability and circular economy practices remained limited, requiring an engaging platform that could inspire participation beyond traditional awareness campaigns.",
+    solution: "Organized Uttar Pradesh's first curated sustainability festival featuring DIY workshops, upcycling demonstrations, environmental films, startup showcases, immersive art installations, and circular economy experiences.",
+    impact: "Created a vibrant public platform that connected citizens with sustainability through hands-on learning, innovation, and creative engagement while promoting environmental responsibility.",
+    image: images.projects.koodadhan2022Festival,
   },
   {
     tag: "Schools · Waste Awareness & Education",
     title: "Koodadhan Workshop at Maa Sharde Inter College",
-    date: "June 2026",
+    date: "March 2024",
     location: "Maa Sharde Inter College, Tilhar, Uttar Pradesh",
     image: images.projects.koodadhanWorkshop,
     challenge: "Students lacked practical understanding of waste segregation and the value of recyclable materials.",
     solution: "Conducted an interactive Koodadhan workshop with demonstrations, discussions, and waste-to-wealth learning activities in partnership with Nagar Palika Parishad Tilhar.",
     impact: "300+ students engaged, improved awareness of waste management practices, and committed to promoting sustainability within their communities.",
+  },
+  {
+    tag: "Technology · Community Engagement",
+    title: "Koodadhan App Pilot Launch",
+    date: "July 2024",
+    location: "City Park, Shahjahanpur, Uttar Pradesh",
+    challenge: "Limited citizen participation and the absence of accessible digital tools made community waste management and reporting less effective.",
+    solution: "Launched the Koodadhan App pilot in partnership with Nagar Nigam Shahjahanpur, combining a community clean-up drive with citizen testing and feedback to develop a scalable digital waste management solution.",
+    impact: "Successfully demonstrated a technology-enabled model for citizen participation and laid the foundation for expanding the Koodadhan App to more communities.",
+    image: images.projects.koodadhanAppPilotLaunch2024,
+  },
+  {
+    tag: "Youth Leadership · Sustainability",
+    title: "Swachhta Yoddha Campaign",
+    date: "November 2025",
+    location: "Tilhar, Uttar Pradesh",
+    challenge: "Young people lacked structured opportunities to develop leadership skills while addressing community waste management and environmental challenges.",
+    solution: "Launched the first phase of the Swachhta Yoddha Campaign, recruiting and mentoring student leaders to champion waste segregation, community beautification, and sustainable environmental action.",
+    impact: "Created a platform for youth leadership in sustainability, inspiring students and schools to lead environmental initiatives and promote long-term community participation.",
+    image: images.projects.swachhtaYoddhaCampaign2025,
+  },
+  {
+    tag: "Schools · Youth Leadership & Waste Management",
+    title: "Swachhata Sarathi Club Workshop",
+    date: "3 December 2025",
+    location: "Rajkiya Balika Inter College, Kaiserganj, Uttar Pradesh",
+    challenge: "Students lacked practical waste management skills and structured opportunities to lead sustainability initiatives within their schools.",
+    solution: "Conducted a hands-on workshop featuring plogging, composting, waste segregation, dry waste innovation activities, and established the Swachhata Sarathi Club to drive long-term student engagement.",
+    impact: "Students gained practical sustainability skills, and the newly established Swachhata Sarathi Club became a platform for ongoing environmental awareness, peer education, and community participation.",
+    image: images.projects.swachhataSarathiClubWorkshop2025,
   },
   {
     tag: "Schools · Environmental Awareness",
@@ -57,6 +107,16 @@ const PROJECTS = [
     challenge: "Limited awareness regarding women's rights, health, safety, education, and opportunities for self-reliance, along with insufficient recognition of women's contributions to community wellbeing.",
     solution: "Green Future Collective organized awareness sessions on rights, health, hygiene, safety, and education while recognizing and honoring women for their contributions to society.",
     impact: "100+ women engaged. Awareness on rights, health & education. Women recognized and honored. Promotion of clean, healthy communities. Partnership between local government and civil society.",
+  },
+  {
+    tag: "Community Clean-Up & Awareness",
+    title: "Bada Mangal Plog Drive",
+    date: "16 June 2026",
+    location: "Kachiyani Kheda Mandir, Tilhar, Uttar Pradesh",
+    challenge: "Large public gatherings generated litter around the temple premises, creating cleanliness and waste management challenges.",
+    solution: "Green Future Collective organized a community-led plog drive, combining waste collection with awareness on cleanliness and responsible disposal practices.",
+    impact: "The initiative brought volunteers and community members together to create a cleaner public space while promoting environmental responsibility and civic participation.",
+    image: images.projects.badaMangal,
   },
 ];
 
@@ -85,7 +145,7 @@ function ProjectsPage() {
                     <span className="rounded-full bg-secondary px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-primary/70">{p.tag}</span>
                     <span className="text-xs text-muted-foreground">Case study</span>
                   </div>
-                  <h3 className="mt-10 font-display text-3xl font-semibold leading-tight text-primary">{p.title}</h3>
+                  <h3 className="mt-10 font-display text-xl font-semibold leading-tight text-primary">{p.title}</h3>
                   {p.date && p.location && (
                     <div className="mt-3 space-y-1 text-sm text-primary/70">
                       <p>{p.date}</p>

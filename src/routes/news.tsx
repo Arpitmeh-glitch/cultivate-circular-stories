@@ -60,42 +60,70 @@ type TimelineItem = {
 
 const TIMELINE: TimelineItem[] = [
   {
-    year: "2020",
-    title: "Project Samagrah Launched",
+    year: "June 2021",
+    title: "World Environment Day 2021 Campaign",
     description:
-      "Green Future Collective partners with the Municipal Corporation of Shahjahanpur to design a city-wide circular waste initiative.",
-    image: images.programs.wasteManagement,
+      "A public awareness campaign around “Reimagine • Recreate • Restore” connected citizens, institutions, and environmental action around circular economy and urban greening.",
+    image: images.projects.worldEnvironmentDay2021,
   },
   {
-    year: "2021",
-    title: "Material Recovery Facility Operational",
+    year: "February 2022",
+    title: "World Wetlands Day Campaign",
     description:
-      "Our first MRF comes online — enabling structured segregation, recovery, and channelling of recyclables away from landfills.",
-    image: images.programs.circularEconomy,
+      "The campaign promoted affordable water-saving practices and everyday conservation habits while strengthening public understanding of wetlands.",
+    image: images.projects.worldWetlandsDay2022,
   },
   {
-    year: "2023",
-    title: "School Awareness Campaign",
+    year: "6–8 March 2022",
+    title: "Koodadhan 2022 – Sustainability Festival",
     description:
-      "Sustainability curriculum sessions with students across Shahjahanpur, building the next generation of climate-literate citizens.",
+      "Uttar Pradesh’s first curated sustainability festival brought together workshops, films, art, and innovation to make circular economy engaging and accessible.",
+    image: images.projects.koodadhan2022Festival,
+  },
+  {
+    year: "March 2024",
+    title: "Koodadhan Workshop at Maa Sharde Inter College",
+    description:
+      "Sustainability curriculum sessions with students across Shahjahanpur built the next generation of climate-literate citizens.",
     image: images.projects.koodadhanWorkshop,
   },
   {
-    year: "2025",
-    title: "Household Segregation Drive",
+    year: "July 2024",
+    title: "Koodadhan App Pilot Launch",
     description:
-      "Neighbourhood-level segregation programme, embedding at-source separation into everyday household routines.",
-    image: images.programs.wasteManagement,
+      "The pilot launch with Nagar Nigam Shahjahanpur tested a digital citizen-participation model for waste reporting and community action.",
+    image: images.projects.koodadhanAppPilotLaunch2024,
   },
   {
-    year: "2026",
-    title: "Natural Holi Rally",
+    year: "November 2025",
+    title: "Swachhta Yoddha Campaign",
+    description:
+      "The first phase of the campaign mentored student leaders to champion waste segregation, clean-up efforts, and environmental action in their communities.",
+    image: images.projects.swachhtaYoddhaCampaign2025,
+  },
+  {
+    year: "3 December 2025",
+    title: "Swachhata Sarathi Club Workshop",
+    description:
+      "A hands-on workshop on plogging, composting, and waste segregation helped establish the Swachhata Sarathi Club as a student-led sustainability platform.",
+    image: images.projects.swachhataSarathiClubWorkshop2025,
+  },
+  {
+    year: "March 2026",
+    title: "Natural Holi Awareness Rally - Katra",
     description:
       "Student-led rally promoting natural colours, cleanliness, and sustainable festival practices.",
     image: images.projects.naturalHoliRally,
   },
   {
-    year: "2026",
+    year: "March 2026",
+    title: "International Women's Day Awareness & Recognition Program",
+    description:
+      "Awareness sessions and recognition efforts helped connect women with rights, health, safety, education, and community participation.",
+    image: images.projects.womensDayAwareness,
+  },
+  {
+    year: "16 June 2026",
     title: "Bada Mangal Plog Drive",
     description:
       "Volunteer-led clean-up around the temple precinct, combined with awareness on responsible disposal.",
@@ -260,47 +288,111 @@ function CircularEconomyIllustration() {
 function Timeline() {
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
+  const [thresholds, setThresholds] = useState<number[]>([]);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
-    const onScroll = () => {
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updateReducedMotion = () => setReducedMotion(mediaQuery.matches);
+    updateReducedMotion();
+
+    let frameId = 0;
+
+    const updateThresholds = () => {
+      const wrapRect = el.getBoundingClientRect();
+      const wrapHeight = el.offsetHeight || el.clientHeight;
+      const nodes = Array.from(el.querySelectorAll<HTMLElement>("[data-timeline-node]"));
+      const nextThresholds = nodes.map((node) => {
+        const rect = node.getBoundingClientRect();
+        const centerY = rect.top - wrapRect.top + rect.height / 2;
+        const threshold = centerY / wrapHeight;
+        return Math.min(0.99, Math.max(0, threshold));
+      });
+      setThresholds(nextThresholds);
+    };
+
+    const updateProgress = () => {
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
       const total = rect.height + vh * 0.6;
       const scrolled = Math.min(Math.max(vh * 0.6 - rect.top, 0), total);
       setProgress(Math.min(1, scrolled / total));
+      frameId = 0;
     };
-    onScroll();
+
+    const onScroll = () => {
+      if (frameId) return;
+      frameId = window.requestAnimationFrame(() => {
+        updateProgress();
+        updateThresholds();
+      });
+    };
+
+    updateThresholds();
+    updateProgress();
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", updateReducedMotion);
+    } else {
+      mediaQuery.addListener(updateReducedMotion);
+    }
+
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
+      if (frameId) window.cancelAnimationFrame(frameId);
+      if (typeof mediaQuery.removeEventListener === "function") {
+        mediaQuery.removeEventListener("change", updateReducedMotion);
+      } else {
+        mediaQuery.removeListener(updateReducedMotion);
+      }
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
   }, []);
 
+  const growthProgress = reducedMotion ? 1 : progress;
+
   return (
     <div ref={wrapRef} className="relative mt-16">
-      {/* Rail base */}
-      <div className="pointer-events-none absolute left-6 top-0 h-full w-[2px] -translate-x-1/2 rounded-full bg-border md:left-1/2" />
-      {/* Rail progress with gradient + glowing head */}
-      <div
-        className="pointer-events-none absolute left-6 top-0 w-[2px] -translate-x-1/2 rounded-full bg-gradient-to-b from-accent via-primary to-primary shadow-[0_0_18px_2px_rgba(16,59,45,0.35)] transition-[height] duration-150 ease-out md:left-1/2"
-        style={{ height: `${progress * 100}%` }}
-      >
-        <span className="absolute -bottom-1 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_16px_4px_rgba(191,161,74,0.55)] animate-[pulse_1.6s_ease-in-out_infinite]" />
+      <div className="pointer-events-none absolute left-6 top-0 h-full w-10 -translate-x-1/2 md:left-1/2">
+        <svg viewBox="0 0 80 1000" className="h-full w-full overflow-visible" preserveAspectRatio="none">
+          <path
+            d="M40 0 C34 84 28 138 34 198 C39 252 44 306 34 356 C24 408 16 452 24 510 C33 574 46 630 38 686 C30 742 18 794 24 854 C31 922 44 976 40 1000"
+            fill="none"
+            stroke="rgba(16,59,45,0.16)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M40 0 C34 84 28 138 34 198 C39 252 44 306 34 356 C24 408 16 452 24 510 C33 574 46 630 38 686 C30 742 18 794 24 854 C31 922 44 976 40 1000"
+            fill="none"
+            stroke="rgba(16,59,45,0.95)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{
+              strokeDasharray: 1000,
+              strokeDashoffset: 1000 * (1 - growthProgress),
+              transition: "stroke-dashoffset 500ms cubic-bezier(0.22, 1, 0.36, 1)",
+            }}
+          />
+        </svg>
       </div>
 
       <ol className="space-y-16 md:space-y-24">
         {TIMELINE.map((item, i) => {
           const isRight = i % 2 === 1;
-          const threshold = (i + 0.35) / TIMELINE.length;
-          const reached = progress >= threshold;
+          const threshold = thresholds[i] ?? (i + 0.35) / TIMELINE.length;
+          const reached = progress >= Math.min(0.99, Math.max(0, threshold - 0.015));
           return (
             <li key={`${item.year}-${item.title}`} className="relative">
               {/* Node */}
               <span
+                data-timeline-node
                 className={[
                   "absolute left-6 top-2 z-10 grid h-5 w-5 -translate-x-1/2 place-items-center rounded-full border-2 bg-background transition-all duration-500 md:left-1/2",
                   reached
@@ -315,6 +407,12 @@ function Timeline() {
                     reached ? "bg-background" : "bg-border",
                   ].join(" ")}
                 />
+                <span
+                  className={[
+                    "pointer-events-none absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-background/70 bg-accent/90 transition-all duration-500",
+                    reached ? "scale-100 opacity-100" : "scale-75 opacity-0",
+                  ].join(" ")}
+                />
               </span>
 
               <div
@@ -323,7 +421,7 @@ function Timeline() {
                   isRight ? "md:[&>*:first-child]:col-start-2" : "",
                 ].join(" ")}
               >
-                <FadeUp>
+                <FadeUp active={reached}>
                   <article
                     className={[
                       "group relative ml-14 rounded-sm border border-border bg-background p-6 transition-all duration-700 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_30px_60px_-30px_rgba(16,59,45,0.35)] md:ml-0",
@@ -353,13 +451,13 @@ function Timeline() {
                     )}
                     <p
                       className={[
-                        "text-[10px] font-semibold uppercase tracking-[0.18em] transition-colors duration-500",
-                        reached ? "text-accent" : "text-primary/40",
+                        "text-[10px] font-semibold uppercase tracking-[0.18em] transition-all duration-500",
+                        reached ? "text-accent opacity-100 translate-y-0" : "text-primary/40 opacity-0 -translate-y-1",
                       ].join(" ")}
                     >
                       {item.year}
                     </p>
-                    <h3 className="mt-3 font-display text-xl font-semibold leading-tight text-primary">
+                    <h3 className="mt-3 font-display text-lg font-semibold leading-tight text-primary">
                       {item.title}
                     </h3>
                     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -389,7 +487,7 @@ function NewsPage() {
         <div className="mx-auto grid max-w-[1440px] items-center gap-16 px-6 lg:grid-cols-2 lg:gap-20 lg:px-12">
           <div>
             <FadeUp>
-              <p className="eyebrow text-accent">Project Samagrah</p>
+              <p className="eyebrow text-accent text-lg md:text-xl">Project Samagrah</p>
             </FadeUp>
             <FadeUp delay={100}>
               <h1 className="mt-8 display-xl max-w-[18ch] text-primary">

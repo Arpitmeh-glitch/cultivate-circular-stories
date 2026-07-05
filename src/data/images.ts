@@ -33,6 +33,12 @@ export const images = {
     koodadhanWorkshop: "/images/projects/koodadhan-workshop.jpg",
     naturalHoliRally: "/images/projects/natural-holi-rally.jpg",
     womensDayAwareness: "/images/projects/womens-day-awareness-program.jpg",
+    worldEnvironmentDay2021: "/images/projects/world-environment-day-2021.jpg",
+    worldWetlandsDay2022: "/images/projects/world-wetlands-day-2022.jpg",
+    koodadhan2022Festival: "/images/projects/koodadhan-2022-festival.jpg",
+    koodadhanAppPilotLaunch2024: "/images/projects/koodadhan-app-pilot-launch-2024.jpg",
+    swachhtaYoddhaCampaign2025: "/images/projects/swachhta-yoddha-campaign-2025.jpg",
+    swachhataSarathiClubWorkshop2025: "/images/projects/swachhata-sarathi-club-workshop-2025.jpg",
   },
   partners: {
     nagarNigamAligarh: "/images/partners/nagar-nigam-aligarh.png",
