@@ -5,7 +5,6 @@ import { CollageHero } from "@/components/site/CollageHero";
 import { Marquee } from "@/components/site/Marquee";
 import { NewsMarquee } from "@/components/site/NewsMarquee";
 import { FadeUp } from "@/components/site/FadeUp";
-import { GrowingBranch } from "@/components/site/GrowingBranch";
 import { Counter } from "@/components/site/Counter";
 import { images } from "@/data/images";
 
@@ -23,9 +22,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   return (
-    <div className="relative min-h-screen bg-background">
-      <GrowingBranch />
-      <div className="relative z-10">
+    <div className="min-h-screen bg-background">
       <SiteHeader />
 
       {/* HERO */}
@@ -322,7 +319,6 @@ function Home() {
       </section>
 
       <SiteFooter />
-      </div>
     </div>
   );
 }
