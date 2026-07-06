@@ -53,80 +53,124 @@ const PROCESS = [
 
 type TimelineItem = {
   year: string;
+  shortDate: string;
   title: string;
   description: string;
+  tag: string;
+  location?: string;
+  kind: "milestone" | "event";
   image?: string;
 };
 
 const TIMELINE: TimelineItem[] = [
   {
     year: "June 2021",
+    shortDate: "JUN 2021",
     title: "World Environment Day 2021 Campaign",
     description:
       "A public awareness campaign around “Reimagine • Recreate • Restore” connected citizens, institutions, and environmental action around circular economy and urban greening.",
+    tag: "Thought Leadership",
+    location: "Shahjahanpur, Uttar Pradesh",
+    kind: "milestone",
     image: images.projects.worldEnvironmentDay2021,
   },
   {
     year: "February 2022",
+    shortDate: "FEB 2022",
     title: "World Wetlands Day Campaign",
     description:
       "The campaign promoted affordable water-saving practices and everyday conservation habits while strengthening public understanding of wetlands.",
+    tag: "Water Conservation",
+    location: "India",
+    kind: "event",
     image: images.projects.worldWetlandsDay2022,
   },
   {
     year: "6–8 March 2022",
+    shortDate: "6–8 MAR 2022",
     title: "Koodadhan 2022 – Sustainability Festival",
     description:
       "Uttar Pradesh’s first curated sustainability festival brought together workshops, films, art, and innovation to make circular economy engaging and accessible.",
+    tag: "Public Engagement",
+    location: "Shaheed Park, Shahjahanpur, U.P.",
+    kind: "milestone",
     image: images.projects.koodadhan2022Festival,
   },
   {
     year: "March 2024",
+    shortDate: "MAR 2024",
     title: "Koodadhan Workshop at Maa Sharde Inter College",
     description:
       "Sustainability curriculum sessions with students across Shahjahanpur built the next generation of climate-literate citizens.",
+    tag: "Schools",
+    location: "Tilhar, Uttar Pradesh",
+    kind: "event",
     image: images.projects.koodadhanWorkshop,
   },
   {
     year: "July 2024",
+    shortDate: "JUL 2024",
     title: "Koodadhan App Pilot Launch",
     description:
       "The pilot launch with Nagar Nigam Shahjahanpur tested a digital citizen-participation model for waste reporting and community action.",
+    tag: "Technology",
+    location: "City Park, Shahjahanpur, U.P.",
+    kind: "milestone",
     image: images.projects.koodadhanAppPilotLaunch2024,
   },
   {
     year: "November 2025",
+    shortDate: "NOV 2025",
     title: "Swachhta Yoddha Campaign",
     description:
       "The first phase of the campaign mentored student leaders to champion waste segregation, clean-up efforts, and environmental action in their communities.",
+    tag: "Youth Leadership",
+    location: "Tilhar, Uttar Pradesh",
+    kind: "event",
     image: images.projects.swachhtaYoddhaCampaign2025,
   },
   {
     year: "3 December 2025",
+    shortDate: "3 DEC 2025",
     title: "Swachhata Sarathi Club Workshop",
     description:
       "A hands-on workshop on plogging, composting, and waste segregation helped establish the Swachhata Sarathi Club as a student-led sustainability platform.",
+    tag: "Schools",
+    location: "Rajkiya Balika Inter College, Kaiserganj, U.P.",
+    kind: "milestone",
     image: images.projects.swachhataSarathiClubWorkshop2025,
   },
   {
     year: "March 2026",
+    shortDate: "MAR 2026",
     title: "Natural Holi Awareness Rally - Katra",
     description:
       "Student-led rally promoting natural colours, cleanliness, and sustainable festival practices.",
+    tag: "Public Awareness",
+    location: "Katra Nagar, Shahjahanpur, U.P.",
+    kind: "event",
     image: images.projects.naturalHoliRally,
   },
   {
     year: "March 2026",
+    shortDate: "MAR 2026",
     title: "International Women's Day Awareness & Recognition Program",
     description:
       "Awareness sessions and recognition efforts helped connect women with rights, health, safety, education, and community participation.",
+    tag: "Women Empowerment",
+    location: "Tilhar, Uttar Pradesh",
+    kind: "milestone",
     image: images.projects.womensDayAwareness,
   },
   {
     year: "16 June 2026",
+    shortDate: "16 JUN 2026",
     title: "Bada Mangal Plog Drive",
     description:
       "Volunteer-led clean-up around the temple precinct, combined with awareness on responsible disposal.",
+    tag: "Community Action",
+    location: "Kachiyani Kheda Mandir, Tilhar, U.P.",
+    kind: "event",
     image: images.projects.badaMangal,
   },
 ];
