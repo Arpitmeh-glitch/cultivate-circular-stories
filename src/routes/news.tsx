@@ -53,80 +53,124 @@ const PROCESS = [
 
 type TimelineItem = {
   year: string;
+  shortDate: string;
   title: string;
   description: string;
+  tag: string;
+  location?: string;
+  kind: "milestone" | "event";
   image?: string;
 };
 
 const TIMELINE: TimelineItem[] = [
   {
     year: "June 2021",
+    shortDate: "JUN 2021",
     title: "World Environment Day 2021 Campaign",
     description:
       "A public awareness campaign around “Reimagine • Recreate • Restore” connected citizens, institutions, and environmental action around circular economy and urban greening.",
+    tag: "Thought Leadership",
+    location: "Shahjahanpur, Uttar Pradesh",
+    kind: "milestone",
     image: images.projects.worldEnvironmentDay2021,
   },
   {
     year: "February 2022",
+    shortDate: "FEB 2022",
     title: "World Wetlands Day Campaign",
     description:
       "The campaign promoted affordable water-saving practices and everyday conservation habits while strengthening public understanding of wetlands.",
+    tag: "Water Conservation",
+    location: "India",
+    kind: "event",
     image: images.projects.worldWetlandsDay2022,
   },
   {
     year: "6–8 March 2022",
+    shortDate: "6–8 MAR 2022",
     title: "Koodadhan 2022 – Sustainability Festival",
     description:
       "Uttar Pradesh’s first curated sustainability festival brought together workshops, films, art, and innovation to make circular economy engaging and accessible.",
+    tag: "Public Engagement",
+    location: "Shaheed Park, Shahjahanpur, U.P.",
+    kind: "milestone",
     image: images.projects.koodadhan2022Festival,
   },
   {
     year: "March 2024",
+    shortDate: "MAR 2024",
     title: "Koodadhan Workshop at Maa Sharde Inter College",
     description:
       "Sustainability curriculum sessions with students across Shahjahanpur built the next generation of climate-literate citizens.",
+    tag: "Schools",
+    location: "Tilhar, Uttar Pradesh",
+    kind: "event",
     image: images.projects.koodadhanWorkshop,
   },
   {
     year: "July 2024",
+    shortDate: "JUL 2024",
     title: "Koodadhan App Pilot Launch",
     description:
       "The pilot launch with Nagar Nigam Shahjahanpur tested a digital citizen-participation model for waste reporting and community action.",
+    tag: "Technology",
+    location: "City Park, Shahjahanpur, U.P.",
+    kind: "milestone",
     image: images.projects.koodadhanAppPilotLaunch2024,
   },
   {
     year: "November 2025",
+    shortDate: "NOV 2025",
     title: "Swachhta Yoddha Campaign",
     description:
       "The first phase of the campaign mentored student leaders to champion waste segregation, clean-up efforts, and environmental action in their communities.",
+    tag: "Youth Leadership",
+    location: "Tilhar, Uttar Pradesh",
+    kind: "event",
     image: images.projects.swachhtaYoddhaCampaign2025,
   },
   {
     year: "3 December 2025",
+    shortDate: "3 DEC 2025",
     title: "Swachhata Sarathi Club Workshop",
     description:
       "A hands-on workshop on plogging, composting, and waste segregation helped establish the Swachhata Sarathi Club as a student-led sustainability platform.",
+    tag: "Schools",
+    location: "Rajkiya Balika Inter College, Kaiserganj, U.P.",
+    kind: "milestone",
     image: images.projects.swachhataSarathiClubWorkshop2025,
   },
   {
     year: "March 2026",
+    shortDate: "MAR 2026",
     title: "Natural Holi Awareness Rally - Katra",
     description:
       "Student-led rally promoting natural colours, cleanliness, and sustainable festival practices.",
+    tag: "Public Awareness",
+    location: "Katra Nagar, Shahjahanpur, U.P.",
+    kind: "event",
     image: images.projects.naturalHoliRally,
   },
   {
     year: "March 2026",
+    shortDate: "MAR 2026",
     title: "International Women's Day Awareness & Recognition Program",
     description:
       "Awareness sessions and recognition efforts helped connect women with rights, health, safety, education, and community participation.",
+    tag: "Women Empowerment",
+    location: "Tilhar, Uttar Pradesh",
+    kind: "milestone",
     image: images.projects.womensDayAwareness,
   },
   {
     year: "16 June 2026",
+    shortDate: "16 JUN 2026",
     title: "Bada Mangal Plog Drive",
     description:
       "Volunteer-led clean-up around the temple precinct, combined with awareness on responsible disposal.",
+    tag: "Community Action",
+    location: "Kachiyani Kheda Mandir, Tilhar, U.P.",
+    kind: "event",
     image: images.projects.badaMangal,
   },
 ];
@@ -271,6 +315,81 @@ function CircularEconomyIllustration() {
 
 // ------------------------------ TIMELINE ------------------------------
 
+function Leaf({
+  side,
+  reached,
+  delay = 0,
+  size = 44,
+}: {
+  side: "left" | "right";
+  reached: boolean;
+  delay?: number;
+  size?: number;
+}) {
+  // Leaf pointing outward from vine. Base of leaf at (0,0), tip toward side.
+  const flip = side === "left" ? -1 : 1;
+  return (
+    <span
+      aria-hidden
+      className="pointer-events-none absolute"
+      style={{
+        width: size,
+        height: size * 0.7,
+        transform: `translate(-50%, -50%) scaleX(${flip})`,
+        transformOrigin: "center",
+      }}
+    >
+      <svg
+        viewBox="0 0 100 70"
+        className={[
+          "h-full w-full transition-all duration-[900ms] ease-out",
+          reached ? "opacity-100 scale-100 rotate-0" : "opacity-0 scale-50 -rotate-12",
+        ].join(" ")}
+        style={{ transitionDelay: `${delay}ms`, transformOrigin: "0% 50%" }}
+      >
+        <defs>
+          <linearGradient id={`leaf-g-${side}-${delay}`} x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stopColor="#7fbf7a" />
+            <stop offset="55%" stopColor="#3f8f4a" />
+            <stop offset="100%" stopColor="#1f5a2e" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M2 35 C 20 5, 60 0, 96 22 C 78 40, 46 60, 12 55 C 6 50, 2 42, 2 35 Z"
+          fill={`url(#leaf-g-${side}-${delay})`}
+          stroke="rgba(16,59,45,0.35)"
+          strokeWidth="0.8"
+        />
+        <path
+          d="M4 36 C 30 30, 60 26, 92 22"
+          fill="none"
+          stroke="rgba(255,255,255,0.55)"
+          strokeWidth="0.9"
+          strokeLinecap="round"
+        />
+      </svg>
+    </span>
+  );
+}
+
+function VineTuft() {
+  return (
+    <div className="pointer-events-none absolute left-6 -bottom-6 -translate-x-1/2 md:left-1/2">
+      <svg viewBox="0 0 120 80" className="h-16 w-24">
+        <defs>
+          <linearGradient id="tuft-g" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stopColor="#5aa15f" />
+            <stop offset="100%" stopColor="#1f5a2e" />
+          </linearGradient>
+        </defs>
+        <path d="M60 0 C56 20 46 34 32 40 C22 44 14 46 6 44 C 22 60 44 66 60 60 C 76 66 98 60 114 44 C 106 46 98 44 88 40 C 74 34 64 20 60 0 Z" fill="url(#tuft-g)" opacity="0.85" />
+        <path d="M60 10 C 58 26 52 40 44 50" stroke="rgba(255,255,255,0.4)" strokeWidth="0.8" fill="none" />
+        <path d="M60 10 C 62 26 68 40 76 50" stroke="rgba(255,255,255,0.4)" strokeWidth="0.8" fill="none" />
+      </svg>
+    </div>
+  );
+}
+
 function Timeline() {
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
@@ -342,113 +461,142 @@ function Timeline() {
   const growthProgress = reducedMotion ? 1 : progress;
 
   return (
-    <div ref={wrapRef} className="relative mt-16">
-      <div className="pointer-events-none absolute left-6 top-0 h-full w-10 -translate-x-1/2 md:left-1/2">
+    <div ref={wrapRef} className="relative mt-16 pb-16">
+      {/* Vine trunk (grows with scroll) */}
+      <div className="pointer-events-none absolute left-6 top-0 h-full w-16 -translate-x-1/2 md:left-1/2">
         <svg viewBox="0 0 80 1000" className="h-full w-full overflow-visible" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="trunk-g" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stopColor="#8b5a3c" />
+              <stop offset="100%" stopColor="#3f2a1a" />
+            </linearGradient>
+          </defs>
+          {/* Faint background trunk */}
           <path
-            d="M40 0 C34 84 28 138 34 198 C39 252 44 306 34 356 C24 408 16 452 24 510 C33 574 46 630 38 686 C30 742 18 794 24 854 C31 922 44 976 40 1000"
+            d="M40 0 C36 120 46 220 38 340 C30 460 46 560 34 680 C24 800 42 900 40 1000"
             fill="none"
-            stroke="rgba(16,59,45,0.16)"
-            strokeWidth="2.2"
+            stroke="rgba(63,42,26,0.14)"
+            strokeWidth="4"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
+          {/* Growing trunk */}
           <path
-            d="M40 0 C34 84 28 138 34 198 C39 252 44 306 34 356 C24 408 16 452 24 510 C33 574 46 630 38 686 C30 742 18 794 24 854 C31 922 44 976 40 1000"
+            d="M40 0 C36 120 46 220 38 340 C30 460 46 560 34 680 C24 800 42 900 40 1000"
             fill="none"
-            stroke="rgba(16,59,45,0.95)"
-            strokeWidth="2.2"
+            stroke="url(#trunk-g)"
+            strokeWidth="4"
             strokeLinecap="round"
             strokeLinejoin="round"
             style={{
-              strokeDasharray: 1000,
-              strokeDashoffset: 1000 * (1 - growthProgress),
-              transition: "stroke-dashoffset 500ms cubic-bezier(0.22, 1, 0.36, 1)",
+              strokeDasharray: 1200,
+              strokeDashoffset: 1200 * (1 - growthProgress),
+              transition: "stroke-dashoffset 600ms cubic-bezier(0.22, 1, 0.36, 1)",
             }}
           />
         </svg>
       </div>
 
-      <ol className="space-y-16 md:space-y-24">
+      <ol className="space-y-14 md:space-y-24">
         {TIMELINE.map((item, i) => {
           const isRight = i % 2 === 1;
           const threshold = thresholds[i] ?? (i + 0.35) / TIMELINE.length;
           const reached = progress >= Math.min(0.99, Math.max(0, threshold - 0.015));
           return (
-            <li key={`${item.year}-${item.title}`} className="relative">
+            <li
+              key={`${item.year}-${item.title}`}
+              className="relative md:grid md:grid-cols-[1fr_120px_1fr] md:items-start md:gap-0"
+            >
               {/* Node */}
               <span
                 data-timeline-node
                 className={[
-                  "absolute left-6 top-2 z-10 grid h-5 w-5 -translate-x-1/2 place-items-center rounded-full border-2 bg-background transition-all duration-500 md:left-1/2",
+                  "absolute left-6 top-3 z-20 grid h-7 w-7 -translate-x-1/2 place-items-center rounded-full border-2 bg-background transition-all duration-500 md:left-1/2",
                   reached
-                    ? "border-primary bg-primary shadow-[0_0_0_6px_rgba(16,59,45,0.12),0_0_20px_4px_rgba(16,59,45,0.35)] scale-110"
-                    : "border-border scale-100",
+                    ? "border-primary bg-background shadow-[0_0_0_5px_rgba(16,59,45,0.1),0_0_18px_2px_rgba(63,143,74,0.45)] scale-110"
+                    : "border-border/70 scale-100",
                 ].join(" ")}
                 aria-hidden
               >
-                <span
-                  className={[
-                    "h-1.5 w-1.5 rounded-full transition-colors duration-500",
-                    reached ? "bg-background" : "bg-border",
-                  ].join(" ")}
-                />
-                <span
-                  className={[
-                    "pointer-events-none absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-background/70 bg-accent/90 transition-all duration-500",
-                    reached ? "scale-100 opacity-100" : "scale-75 opacity-0",
-                  ].join(" ")}
-                />
+                <svg viewBox="0 0 24 24" className={["h-3.5 w-3.5 transition-colors duration-500", reached ? "text-primary" : "text-muted-foreground/60"].join(" ")} fill="currentColor">
+                  <path d="M12 2 C 8 6 6 10 8 14 C 5 15 3 18 4 21 C 8 20 11 18 12 15 C 13 18 16 20 20 21 C 21 18 19 15 16 14 C 18 10 16 6 12 2 Z" />
+                </svg>
               </span>
 
+              {/* Decorative leaves flanking the node */}
+              <span
+                className="pointer-events-none absolute left-6 top-3 z-10 hidden md:block md:left-1/2"
+                style={{ transform: "translate(-50%, -50%)" }}
+                aria-hidden
+              >
+                <span className="relative block">
+                  <span style={{ position: "absolute", left: -18, top: 0 }}>
+                    <Leaf side="left" reached={reached} delay={120} size={54} />
+                  </span>
+                  <span style={{ position: "absolute", left: 18, top: 0 }}>
+                    <Leaf side="right" reached={reached} delay={220} size={54} />
+                  </span>
+                </span>
+              </span>
+
+              {/* Date label (in the vine gutter) */}
+              <span
+                className={[
+                  "absolute top-3 z-10 ml-16 text-[11px] font-bold uppercase tracking-[0.18em] text-accent transition-all duration-500 md:ml-0 md:top-3",
+                  isRight
+                    ? "md:left-[calc(50%+34px)]"
+                    : "md:right-[calc(50%+34px)]",
+                  reached ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1",
+                ].join(" ")}
+              >
+                {item.shortDate.split(" ").map((part, idx) => (
+                  <span key={idx} className="block leading-tight">{part}</span>
+                ))}
+              </span>
+
+              {/* Card */}
               <div
                 className={[
-                  "md:grid md:grid-cols-2 md:gap-12",
-                  isRight ? "md:[&>*:first-child]:col-start-2" : "",
+                  "relative",
+                  isRight ? "md:col-start-3 md:pl-12" : "md:col-start-1 md:pr-12",
                 ].join(" ")}
               >
                 <FadeUp active={reached}>
                   <article
                     className={[
-                      "group relative ml-14 rounded-sm border border-border bg-background p-6 transition-all duration-700 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_30px_60px_-30px_rgba(16,59,45,0.35)] md:ml-0",
-                      isRight ? "md:mr-0 md:ml-8" : "md:ml-0 md:mr-8",
+                      "group relative ml-14 rounded-lg border border-border bg-background p-5 shadow-[0_10px_30px_-20px_rgba(16,59,45,0.25)] transition-all duration-700 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_30px_60px_-30px_rgba(16,59,45,0.4)] md:ml-0 md:flex md:gap-5",
                       reached
-                        ? "opacity-100 translate-x-0 border-primary/30 shadow-[0_20px_50px_-30px_rgba(16,59,45,0.4)]"
+                        ? "opacity-100 translate-x-0 border-primary/30"
                         : `opacity-70 ${isRight ? "md:translate-x-6" : "md:-translate-x-6"}`,
                     ].join(" ")}
                   >
-                    {/* Connector dash from card to rail (desktop) */}
-                    <span
-                      className={[
-                        "pointer-events-none absolute top-4 hidden h-px transition-all duration-500 md:block",
-                        reached ? "bg-primary/50 w-8" : "bg-border w-6",
-                        isRight ? "-left-8" : "-right-8",
-                      ].join(" ")}
-                    />
                     {item.image && (
-                      <div className="mb-5 aspect-[16/10] w-full overflow-hidden rounded-sm bg-muted">
+                      <div className="mb-4 aspect-[4/3] w-full overflow-hidden rounded-md bg-muted md:order-2 md:mb-0 md:aspect-square md:h-28 md:w-28 md:flex-none">
                         <img
                           src={item.image}
                           alt={item.title}
                           loading="lazy"
-                          className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06]"
+                          className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.08]"
                         />
                       </div>
                     )}
-                    <p
-                      className={[
-                        "text-[10px] font-semibold uppercase tracking-[0.18em] transition-all duration-500",
-                        reached ? "text-accent opacity-100 translate-y-0" : "text-primary/40 opacity-0 -translate-y-1",
-                      ].join(" ")}
-                    >
-                      {item.year}
-                    </p>
-                    <h3 className="mt-3 font-display text-lg font-semibold leading-tight text-primary">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                      {item.description}
-                    </p>
+                    <div className="md:order-1 md:min-w-0 md:flex-1">
+                      <h3 className="font-display text-base font-semibold leading-tight text-primary md:text-[15px]">
+                        {item.title}
+                      </h3>
+                      <span className="mt-3 inline-flex items-center rounded-full bg-secondary/70 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-primary/75">
+                        {item.tag}
+                      </span>
+                      {item.location && (
+                        <p className="mt-3 flex items-center gap-1.5 text-[11px] text-muted-foreground">
+                          <svg viewBox="0 0 24 24" className="h-3 w-3 flex-none text-primary/60" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M12 21s-7-6.5-7-12a7 7 0 1 1 14 0c0 5.5-7 12-7 12z" strokeLinejoin="round" />
+                            <circle cx="12" cy="9" r="2.5" />
+                          </svg>
+                          {item.location}
+                        </p>
+                      )}
+                    </div>
                   </article>
                 </FadeUp>
               </div>
@@ -456,6 +604,8 @@ function Timeline() {
           );
         })}
       </ol>
+
+      <VineTuft />
     </div>
   );
 }
@@ -576,20 +726,41 @@ function NewsPage() {
       {/* SECTION 4 — OUR JOURNEY */}
       <section className="py-24 lg:py-32">
         <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-          <FadeUp>
-            <p className="eyebrow text-accent">Our journey</p>
-          </FadeUp>
-          <FadeUp delay={100}>
-            <h2 className="mt-6 display-lg max-w-[22ch] text-primary">
-              A timeline of <span className="text-accent">milestones.</span>
-            </h2>
-          </FadeUp>
-          <FadeUp delay={180}>
-            <p className="mt-8 max-w-[60ch] text-lg leading-relaxed text-muted-foreground">
-              Every date on this line represents infrastructure built, awareness raised,
-              or a community moment that moved Shahjahanpur closer to a circular future.
-            </p>
-          </FadeUp>
+          <div className="flex flex-wrap items-start justify-between gap-6">
+            <div>
+              <FadeUp>
+                <p className="eyebrow text-accent">Our journey</p>
+              </FadeUp>
+              <FadeUp delay={100}>
+                <h2 className="mt-6 display-lg max-w-[22ch] text-primary">
+                  Project Samagrah <span className="text-accent">Timeline.</span>
+                </h2>
+              </FadeUp>
+              <FadeUp delay={180}>
+                <p className="mt-8 max-w-[60ch] text-lg leading-relaxed text-muted-foreground">
+                  A journey of collective action, innovation, and community participation
+                  towards building a cleaner, circular and sustainable Shahjahanpur.
+                </p>
+              </FadeUp>
+            </div>
+            <FadeUp delay={220}>
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-secondary/60 px-3.5 py-1.5 text-xs font-semibold text-primary">
+                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-accent" fill="currentColor">
+                    <path d="M12 2 C 8 6 6 10 8 14 C 5 15 3 18 4 21 C 8 20 11 18 12 15 C 13 18 16 20 20 21 C 21 18 19 15 16 14 C 18 10 16 6 12 2 Z" />
+                  </svg>
+                  Milestone
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-secondary/60 px-3.5 py-1.5 text-xs font-semibold text-primary">
+                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-primary/70" fill="currentColor">
+                    <path d="M12 2 C 8 6 6 10 8 14 C 5 15 3 18 4 21 C 8 20 11 18 12 15 C 13 18 16 20 20 21 C 21 18 19 15 16 14 C 18 10 16 6 12 2 Z" />
+                  </svg>
+                  Event
+                </span>
+              </div>
+            </FadeUp>
+          </div>
+
 
           <Timeline />
         </div>
