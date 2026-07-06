@@ -726,20 +726,41 @@ function NewsPage() {
       {/* SECTION 4 — OUR JOURNEY */}
       <section className="py-24 lg:py-32">
         <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-          <FadeUp>
-            <p className="eyebrow text-accent">Our journey</p>
-          </FadeUp>
-          <FadeUp delay={100}>
-            <h2 className="mt-6 display-lg max-w-[22ch] text-primary">
-              A timeline of <span className="text-accent">milestones.</span>
-            </h2>
-          </FadeUp>
-          <FadeUp delay={180}>
-            <p className="mt-8 max-w-[60ch] text-lg leading-relaxed text-muted-foreground">
-              Every date on this line represents infrastructure built, awareness raised,
-              or a community moment that moved Shahjahanpur closer to a circular future.
-            </p>
-          </FadeUp>
+          <div className="flex flex-wrap items-start justify-between gap-6">
+            <div>
+              <FadeUp>
+                <p className="eyebrow text-accent">Our journey</p>
+              </FadeUp>
+              <FadeUp delay={100}>
+                <h2 className="mt-6 display-lg max-w-[22ch] text-primary">
+                  Project Samagrah <span className="text-accent">Timeline.</span>
+                </h2>
+              </FadeUp>
+              <FadeUp delay={180}>
+                <p className="mt-8 max-w-[60ch] text-lg leading-relaxed text-muted-foreground">
+                  A journey of collective action, innovation, and community participation
+                  towards building a cleaner, circular and sustainable Shahjahanpur.
+                </p>
+              </FadeUp>
+            </div>
+            <FadeUp delay={220}>
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-secondary/60 px-3.5 py-1.5 text-xs font-semibold text-primary">
+                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-accent" fill="currentColor">
+                    <path d="M12 2 C 8 6 6 10 8 14 C 5 15 3 18 4 21 C 8 20 11 18 12 15 C 13 18 16 20 20 21 C 21 18 19 15 16 14 C 18 10 16 6 12 2 Z" />
+                  </svg>
+                  Milestone
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-secondary/60 px-3.5 py-1.5 text-xs font-semibold text-primary">
+                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-primary/70" fill="currentColor">
+                    <path d="M12 2 C 8 6 6 10 8 14 C 5 15 3 18 4 21 C 8 20 11 18 12 15 C 13 18 16 20 20 21 C 21 18 19 15 16 14 C 18 10 16 6 12 2 Z" />
+                  </svg>
+                  Event
+                </span>
+              </div>
+            </FadeUp>
+          </div>
+
 
           <Timeline />
         </div>
