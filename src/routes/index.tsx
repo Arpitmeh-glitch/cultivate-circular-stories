@@ -322,6 +322,7 @@ function Home() {
       </section>
 
       <SiteFooter />
+      </div>
     </div>
   );
 }
