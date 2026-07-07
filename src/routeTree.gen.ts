@@ -16,6 +16,7 @@ import { Route as ImpactRouteImport } from './routes/impact'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FellowshipRouteImport } from './routes/fellowship'
 import { Route as DonateRouteImport } from './routes/donate'
+import { Route as CreatorRouteImport } from './routes/creator'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CollaborateRouteImport } from './routes/collaborate'
 import { Route as AboutRouteImport } from './routes/about'
@@ -56,6 +57,11 @@ const DonateRoute = DonateRouteImport.update({
   path: '/donate',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CreatorRoute = CreatorRouteImport.update({
+  id: '/creator',
+  path: '/creator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/collaborate': typeof CollaborateRoute
   '/contact': typeof ContactRoute
+  '/creator': typeof CreatorRoute
   '/donate': typeof DonateRoute
   '/fellowship': typeof FellowshipRoute
   '/gallery': typeof GalleryRoute
@@ -95,6 +102,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/collaborate': typeof CollaborateRoute
   '/contact': typeof ContactRoute
+  '/creator': typeof CreatorRoute
   '/donate': typeof DonateRoute
   '/fellowship': typeof FellowshipRoute
   '/gallery': typeof GalleryRoute
@@ -109,6 +117,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/collaborate': typeof CollaborateRoute
   '/contact': typeof ContactRoute
+  '/creator': typeof CreatorRoute
   '/donate': typeof DonateRoute
   '/fellowship': typeof FellowshipRoute
   '/gallery': typeof GalleryRoute
@@ -124,6 +133,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/collaborate'
     | '/contact'
+    | '/creator'
     | '/donate'
     | '/fellowship'
     | '/gallery'
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/collaborate'
     | '/contact'
+    | '/creator'
     | '/donate'
     | '/fellowship'
     | '/gallery'
@@ -150,6 +161,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/collaborate'
     | '/contact'
+    | '/creator'
     | '/donate'
     | '/fellowship'
     | '/gallery'
@@ -164,6 +176,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CollaborateRoute: typeof CollaborateRoute
   ContactRoute: typeof ContactRoute
+  CreatorRoute: typeof CreatorRoute
   DonateRoute: typeof DonateRoute
   FellowshipRoute: typeof FellowshipRoute
   GalleryRoute: typeof GalleryRoute
@@ -224,6 +237,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DonateRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/creator': {
+      id: '/creator'
+      path: '/creator'
+      fullPath: '/creator'
+      preLoaderRoute: typeof CreatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -260,6 +280,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   CollaborateRoute: CollaborateRoute,
   ContactRoute: ContactRoute,
+  CreatorRoute: CreatorRoute,
   DonateRoute: DonateRoute,
   FellowshipRoute: FellowshipRoute,
   GalleryRoute: GalleryRoute,
